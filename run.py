@@ -6,7 +6,7 @@ def opening_text():
     Displays the opening text. details what aircraft are available to select.
     """
     typing("Welcome to the Loadsheet Planner\n", 0.02)
-    typing("Retrieving the database of Aircraft\n", 0.02)
+    typing("Retrieving the database of Aircraft...\n", 0.02)
     print()
     typing('                         |                         \n', 0.01)
     typing('                         |                         \n', 0.01)
@@ -19,7 +19,7 @@ def opening_text():
     typing("   '''.-^-.' '.-^-.''\       /''.-^-.' '.-^-.'''    \n", 0.01)
     typing("      '___'   '___'   ''---''   '___'   '___'       \n", 0.01)
     print()
-    typing("You have 3 aircraft available to you:\n", 0.02)
+    typing("You have 3 aircraft available to load:\n", 0.02)
     typing("a) Boeing 747-400\n", 0.02)
     typing("b) Embraer 190\n", 0.02)
     typing("c) Jetstream 41\n", 0.02)
@@ -48,10 +48,11 @@ def select_aircraft():
         return aircraft_c
     else:
         print()
+        print(f"-----You selected {aircraft_type}------")
         print("------That wasn't a valid aircraft------")
         print("Please select your aircraft from the options a, b or c.\n")
         select_aircraft()
-   
+
 
 def main():
     """
@@ -62,3 +63,5 @@ def main():
 
 
 main()
+aircraft = select_aircraft()
+print(aircraft)

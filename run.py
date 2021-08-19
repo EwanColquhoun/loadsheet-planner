@@ -15,9 +15,11 @@ def opening_text():
     typing('                     .-`   `-.                     \n', 0.01)
     typing('             _______-  -----  -_______             \n', 0.01)
     typing('                    -         -                    \n', 0.01)
-    typing(' \__________________:         :__________________/ \n', 0.01)
+    typing(' \__________________:    o    :__________________/ \n', 0.01)
     typing("   '''.-^-.' '.-^-.''\       /''.-^-.' '.-^-.'''    \n", 0.01)
     typing("      '___'   '___'   ''---''   '___'   '___'       \n", 0.01)
+    print()
+    typing("-----By Ewan Colquhoun - not for operational use-----\n", 0.01)
     print()
     typing("You have 3 aircraft available to load:\n", 0.02)
     typing("a) Boeing 747-400\n", 0.02)
@@ -54,14 +56,21 @@ def select_aircraft():
         select_aircraft()
 
 
+def fuel_quantity(type):
+    """
+    Defines the maximum and minimum fuel quantities depending on which
+    aircraft was selected by the user.
+    """
+    print(type)
+
+
 def main():
     """
     Runs the application on loading the browser.
     """
     opening_text()
-    select_aircraft()
+    aircraft = select_aircraft()
+    fuel_quantity(aircraft)
 
 
 main()
-aircraft = select_aircraft()
-print(aircraft)

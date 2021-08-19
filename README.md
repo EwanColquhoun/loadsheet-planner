@@ -1,45 +1,77 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Loadsheet Planner (WORK-IN-PROGRESS)
 
-Welcome USER_NAME,
+The Loadsheet planner application is designed for use by an airline dispatcher to quickly calculate the acceptable loads whilst preparing an aircraft for dispatch. <br>
+It is designed to take a number of inputs from the user to narrow down the acceptable fuel and passenger load available to them. In this scenario the fuel and passenger load would have already been passed from the company and Flight Crew respectively.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+To try your hand planning a loadsheet please click [**here**]{############}.
 
-## Gitpod Reminders
+![Image of the deployed application](################)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+# Contents
 
-`python3 -m http.server`
+* [**User Experience UX**](<#user-experience-ux>)
+    *  [User Stories](<#user-stories>)
+    * [Owner Stories](<#owner-stories>)
+    * [Instructions](<#instructions>)
+* [**Data Model**](<#data-model>)
+    * [Code flow charts](<#code-flow-charts>)
+* [**Features**](<#features>)
+    * [**Existing Features**](<#existing-features>)
+    * [**Future Features**](<#future-features>)
+* [**Technologies Used**](<#technologies-used>)
+* [**Testing**](<#testing>)
+* [**Deployment**](<#deployment>)
+* [**Credits**](<#credits>)
+*  [**Acknowledgements**](<#acknowledgements>)
 
-A blue button should appear to click: *Make Public*,
+# User Experience
 
-Another blue button should appear to click: *Open Browser*.
+## User Stories
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+* As a user I want to input data to creata a loadsheet.
+* As a user I want to select which aircraft I am loading.
+* As a user I want to input the fuel load.
+* As a user I want to input the requested Passenger numbers.
+* As a user I want to know that my inputs are correct.
 
-A blue button should appear to click: *Make Public*,
+## Owner Stories
 
-Another blue button should appear to click: *Open Browser*.
+* As an owner I want to ensure the data entered is correct and valid.
+* As an owner I want to ensure the loadsheet is useable by those detached from the input process.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+[Back to top](<#contents>)
+## Instructions
 
-## Updates Since The Instructional Video
+WIP
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+[Back to top](<#contents>)
+# Data Model
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+## Code flow charts
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+![Code flow charts images](/assets/images/loadsheet.png)
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+[Back to top](<#contents>)
+# Features
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+## Existing Features
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+## Future Features
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+[Back to top](<#contents>)
+# Technologies Used
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+[Back to top](<#contents>)
+# Testing
 
---------
+[Back to top](<#contents>)
+# Deployment
 
-Happy coding!
+[Back to top](<#contents>)
+# Credits
+
+[Back to top](<#contents>)
+# Acknowledgements
+
+[Back to top](<#contents>)
+

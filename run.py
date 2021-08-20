@@ -34,10 +34,10 @@ class Aircraft:
     """
     def __init__(self, model, maxPax, maxFuel, emptyWeight, maxWeight):
         self.model = model
-        self.maxPax = maxPax
-        self.maxFuel = maxFuel
-        self.emptyWeight = emptyWeight
-        self.maxWeight = maxWeight
+        self.maxPax = int(maxPax)
+        self.maxFuel = int(maxFuel)
+        self.emptyWeight = int(emptyWeight)
+        self.maxWeight = int(maxWeight)
 
 
 def select_aircraft():
@@ -50,16 +50,16 @@ def select_aircraft():
 
     if aircraft_type.lower() == 'a':
         aircraft_a = 'Boeing 747-400'
-        print(f"You have chosen the {aircraft_a}")
-        return 'B744'
+        print(f"You have chosen the {aircraft_a}\n")
+        return jumbo
     elif aircraft_type.lower() == 'b':
         aircraft_b = 'Embraer 190'
-        print(f"You have chosen the {aircraft_b}")
-        return 'E190'
+        print(f"You have chosen the {aircraft_b}\n")
+        return ejet
     elif aircraft_type.lower() == 'c':
         aircraft_c = 'Jetstream 41'
-        print(f"You have chosen the {aircraft_c}")
-        return 'J41'
+        print(f"You have chosen the {aircraft_c}\n")
+        return jetstream
     else:
         print()
         print(f"-----You selected {aircraft_type}------")
@@ -73,20 +73,43 @@ def fuel_quantity(type):
     Defines the maximum and minimum fuel quantities depending on which
     aircraft was selected by the user.
     """
-    if type = 
+    minFuel = round(0.05 * type.maxFuel)
+    typing(f"The maximum fuel for the {type.model} is {type.maxFuel}kg\n", 0.02)
+    typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
+    fuel = input("Please enter the total fuel in kg. eg, 140000, 8000, 1200: ")
+
+    try:
+        if int(fuel) <= minFuel:
+            print("-------------FUEL TOO LOW-----------------")
+            print("-----PLEASE ENTER a VALID FUEL FIGURE-----")
+            fuel_quantity(type)
+        elif int(fuel) <= type.maxFuel:
+            typing(f"{fuel}kg is valid and has been accepted.\n", 0.02)
+            return fuel
+        else:
+            print("---------FUEL QUANTITY TOO HIGH-----------")
+            print("-----PLEASE ENTER a VALID FUEL FIGURE-----")
+            fuel_quantity(type)
+    except ValueError as e:
+        print(e)
+        print()
+        print("------Please enter fuel as a number------\n")
+        print(f"Maximum {type.maxFuel}kg. Minimum {minFuel}kg.\n")
+        print()
+        fuel_quantity(type)
 
 
 def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()
+    # opening_text()
     aircraft = select_aircraft()
-    fuel_quantity(aircraft)
+    fuel = fuel_quantity(aircraft)
 
 
-jumbo = Aircraft('B744', '331', '170000', '183500', '396000')
-ejet = Aircraft('E190', '98', '12900', '28000', '45990')
-jetstream = Aircraft('J41', '29', '2700', '6400', '10800')
+jumbo = Aircraft('Boeing 747-400', '331', '170000', '183500', '396000')
+ejet = Aircraft('Embraer 190', '98', '12900', '28000', '45990')
+jetstream = Aircraft('Jetstream 41', '29', '2700', '6400', '10800')
 
 main()

@@ -91,8 +91,6 @@ def fuel_quantity(type):
             fuel_quantity(type)
         elif int(fuel) <= type.maxFuel:
             typing(f"{fuel}kg is valid and has been accepted.\n", 0.02)
-            print(fuel)
-            pax = 2
             return fuel
         else:
             print()
@@ -130,12 +128,14 @@ def main():
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
-    pax = 4
+    pax = 4  # PAX here until load pax functino defined
     print(f"Total fuel loaded on {jumbo.model} is {jumbo.fuel}kg")
-    return pax
+    # above print() is here until print ls function defined
+    return pax  # PAX here until load pax functino defined
 
 
-jumbo = Aircraft('Boeing 747-400', '331', '0', '170000', '0', '183500', '396000')
+jumbo = Aircraft('Boeing 747-400', '331', '0', '170000',
+                '0', '183500', '396000')
 ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '28000', '45990')
 jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '6400', '10800')
 

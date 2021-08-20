@@ -6,20 +6,20 @@ def opening_text():
     Displays the opening text. details what aircraft are available to select.
     """
     typing("        Welcome to the Loadsheet Planner\n", 0.02)
-    typing("      Retrieving the database of Aircraft...\n", 0.02)
+    typing("   ....Retrieving the database of Aircraft....\n", 0.02)
     print()
-    typing('                         |                         \n', 0.01)
-    typing('                         |                         \n', 0.01)
-    typing('                         |                         \n', 0.01)
-    typing('                        /|\                        \n', 0.01)
-    typing('                     .-`   `-.                     \n', 0.01)
-    typing('             _______-  -----  -_______             \n', 0.01)
-    typing('                    -         -                    \n', 0.01)
-    typing(' \__________________:    o    :__________________/ \n', 0.01)
-    typing("   '''.-^-.' '.-^-.''\       /''.-^-.' '.-^-.'''    \n", 0.01)
-    typing("      '___'   '___'   ''---''   '___'   '___'       \n", 0.01)
+    typing('                         |                         \n', 0.005)
+    typing('                         |                         \n', 0.005)
+    typing('                         |                         \n', 0.005)
+    typing('                        /|\                        \n', 0.005)
+    typing('                     .-`   `-.                     \n', 0.005)
+    typing('             _______:  -----  :_______             \n', 0.005)
+    typing('                    |         |                    \n', 0.005)
+    typing(' \__________________:    o    :__________________/ \n', 0.005)
+    typing("   '''.-^-.' '.-^-.''\       /''.-^-.' '.-^-.'''    \n", 0.005)
+    typing("      '___'   '___'   ''---''   '___'   '___'       \n", 0.005)
     print()
-    typing("-----By Ewan Colquhoun - not for operational use-----\n", 0.01)
+    typing("-----By Ewan Colquhoun - not for operational use-----\n", 0.02)
     print()
     typing("You have 3 aircraft available to load:\n", 0.02)
     typing("a) Boeing 747-400\n", 0.02)
@@ -32,12 +32,14 @@ class Aircraft:
     """
     Creates an instance of an Aircraft
     """
-    def __init__(self, model, maxPax, maxFuel, emptyWeight, maxWeight):
+    def __init__(self, model, maxPax, pax, maxFuel, fuel, eWeight, mtow):
         self.model = model
-        self.maxPax = int(maxPax)
+        self.maxPax = maxPax
+        self.pax = pax
         self.maxFuel = int(maxFuel)
-        self.emptyWeight = int(emptyWeight)
-        self.maxWeight = int(maxWeight)
+        self.fuel = fuel
+        self.eWeight = eWeight
+        self.mtow = mtow
 
 
 def select_aircraft():
@@ -72,31 +74,52 @@ def fuel_quantity(type):
     """
     Defines the maximum and minimum fuel quantities depending on which
     aircraft was selected by the user.
+    Displays the maximum and minimum fuel values for the user. Once fuel is
+    inputted the value is checked to ensure it is in the correct range.
+    An error is thrown if the value isn't a whole number.
     """
     minFuel = round(0.05 * type.maxFuel)
-    typing(f"The maximum fuel for the {type.model} is {type.maxFuel}kg\n", 0.02)
+    typing(f"The maximum fuel is {type.maxFuel}kg\n", 0.02)
     typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
     fuel = input("Please enter the total fuel in kg. eg, 140000, 8000, 1200: ")
 
     try:
         if int(fuel) <= minFuel:
+            print()
             print("-------------FUEL TOO LOW-----------------")
-            print("-----PLEASE ENTER a VALID FUEL FIGURE-----")
+            print("-----PLEASE ENTER A VALID FUEL FIGURE-----\n")
             fuel_quantity(type)
         elif int(fuel) <= type.maxFuel:
             typing(f"{fuel}kg is valid and has been accepted.\n", 0.02)
+            print(fuel)
+            pax = 2
             return fuel
         else:
+            print()
             print("---------FUEL QUANTITY TOO HIGH-----------")
-            print("-----PLEASE ENTER a VALID FUEL FIGURE-----")
+            print("-----PLEASE ENTER A VALID FUEL FIGURE-----\n")
             fuel_quantity(type)
-    except ValueError as e:
-        print(e)
+    except ValueError:
         print()
-        print("------Please enter fuel as a number------\n")
+        print("-----PLEASE ENTER FUEL AS A WHOLE NUMBER-----\n")
         print(f"Maximum {type.maxFuel}kg. Minimum {minFuel}kg.\n")
-        print()
         fuel_quantity(type)
+
+
+def load_fuel(fuel, aircraft):
+    """
+    Uses the fuel figure from the fuel_quantity function to update the
+    Aircraft.fuel of the aircraft in use.
+    """
+    if aircraft == jumbo:
+        jumbo.fuel = fuel
+        return
+    elif aircraft == ejet:
+        ejet.fuel = fuel
+        return
+    elif aircraft == jetstream:
+        jetstream.fuel = fuel
+        return
 
 
 def main():
@@ -106,10 +129,15 @@ def main():
     # opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
+    load_fuel(fuel, aircraft)
+    pax = 4
+    print(f"Total fuel loaded on {jumbo.model} is {jumbo.fuel}kg")
+    return pax
 
 
-jumbo = Aircraft('Boeing 747-400', '331', '170000', '183500', '396000')
-ejet = Aircraft('Embraer 190', '98', '12900', '28000', '45990')
-jetstream = Aircraft('Jetstream 41', '29', '2700', '6400', '10800')
+jumbo = Aircraft('Boeing 747-400', '331', '0', '170000', '0', '183500', '396000')
+ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '28000', '45990')
+jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '6400', '10800')
 
+fleet = (jumbo, ejet, jetstream)
 main()

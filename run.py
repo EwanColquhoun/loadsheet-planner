@@ -34,12 +34,12 @@ class Aircraft:
     """
     def __init__(self, model, maxPax, pax, maxFuel, fuel, eWeight, mtow):
         self.model = model
-        self.maxPax = maxPax
-        self.pax = pax
+        self.maxPax = int(maxPax)
+        self.pax = int(pax)
         self.maxFuel = int(maxFuel)
-        self.fuel = fuel
-        self.eWeight = eWeight
-        self.mtow = mtow
+        self.fuel = int(fuel)
+        self.eWeight = int(eWeight)
+        self.mtow = int(mtow)
 
 
 def select_aircraft():
@@ -78,6 +78,7 @@ def fuel_quantity(type):
     inputted the value is checked to ensure it is in the correct range.
     An error is thrown if the value isn't a whole number.
     """
+    typing("Fuel quantity...", 0.02)
     minFuel = round(0.05 * type.maxFuel)
     typing(f"The maximum fuel is {type.maxFuel}kg\n", 0.02)
     typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
@@ -104,19 +105,75 @@ def fuel_quantity(type):
         fuel_quantity(type)
 
 
-def load_fuel(fuel, aircraft):
+def load_fuel(fuel, type):
     """
     Uses the fuel figure from the fuel_quantity function to update the
     Aircraft.fuel of the aircraft in use.
     """
-    if aircraft == jumbo:
+    if type == jumbo:
         jumbo.fuel = fuel
         return
-    elif aircraft == ejet:
+    elif type == ejet:
         ejet.fuel = fuel
         return
-    elif aircraft == jetstream:
+    elif type == jetstream:
         jetstream.fuel = fuel
+        return
+
+
+def calculate_underload(aircraft, fuel):
+    """
+    Calculates the useful load to the user. This indicated how much additional
+    weight the aircraft can carry. i.e passengers and cargo.
+    """
+    underload = int(aircraft.mtow) - int(aircraft.eWeight) - int(aircraft.fuel)
+    typing(f"The underload before passenger and cargo is {underload}kg\n", 0.02) 
+
+
+def passenger_quantity(type):
+    """
+    Defines the maximum quantity of passengers available to upload based on the
+    underload the aircraft has. It asks for an input of passenger numbers.
+    It checks for validity both in type and quantity and feedsback to the
+    user if there are any errors or if they are successful with their input.
+
+    """
+    print()
+    typing("Passenger quantity...\n", 0.02)
+    typing("Passenger weights are 86kg for adults and 35kg for children\n", 0.02)
+    pax = input("Please enter the passenger load in number of passengers: ")
+
+    try:
+        if int(pax) == '':
+            print()
+            print("-----PLEASE ENTER 0 IF NO PASSENGERS-----")
+            passenger_quantity(type)
+        elif int(pax) > type.maxPax:
+            print()
+            print("-----PASSENGER FIGURE TOO HIGH------")
+            print(f"Max for the {type.model} is {type.maxPax} passengers.")
+            passenger_quantity(type)
+        else:
+            typing(f"{pax} is valid and has been accepted.\n", 0.02)
+            return pax
+    except ValueError:
+        print()
+        print("Please enter passenger figure as a whole number only.")
+        passenger_quantity(type)
+
+
+def load_passengers(type, pax):
+    """
+
+    """
+    if type == jumbo:
+        jumbo.pax = pax
+        return
+    elif type == ejet:
+        ejet.pax = pax
+        return
+    elif type == jetstream:
+        jetstream.pax = pax
         return
 
 
@@ -128,10 +185,12 @@ def main():
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
-    pax = 4  # PAX here until load pax functino defined
-    print(f"Total fuel loaded on {jumbo.model} is {jumbo.fuel}kg")
-    # above print() is here until print ls function defined
-    return pax  # PAX here until load pax functino defined
+    calculate_underload(aircraft, fuel)
+    pax = passenger_quantity(aircraft)
+    load_passengers(aircraft, pax)
+    print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
+    print(f"of fuel and {aircraft.pax} passengers.")
+
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '170000',

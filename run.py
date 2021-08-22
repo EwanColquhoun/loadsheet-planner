@@ -142,6 +142,7 @@ def passenger_quantity(type):
     typing("Passenger quantity...\n", 0.02)
     typing("Passenger weights are 86kg for adults and 35kg for children\n", 0.02)
     pax = input("Please enter the passenger load in number of passengers: ")
+    pax_weight = int(pax) * 86
 
     try:
         if int(pax) == '':
@@ -155,7 +156,8 @@ def passenger_quantity(type):
             passenger_quantity(type)
         else:
             typing(f"{pax} is valid and has been accepted.\n", 0.02)
-            return pax
+            print(f"The passenger weight is {pax_weight}kg")
+            return pax, pax_weight
     except ValueError:
         print()
         print("Please enter passenger figure as a whole number only.")
@@ -177,6 +179,40 @@ def load_passengers(type, pax):
         return
 
 
+def check_max_weight(type, weight):
+    """
+    Performs a calculation to see if the aircrafts take-off
+    weight it acceptable. Dependant on fuel and passenger load.
+    """
+    tow = int(type.eWeight) + int(weight) + int(type.fuel)
+    if tow > type.mtow:
+        print()
+        print(f"The take off weight is {tow}kg")
+        print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
+        print("Please remove cargo, passengers or fuel:")
+        print("a) Cargo")
+        print("b) Passengers")
+        print("c) Fuel\n")
+        choice = input("Please select a, b or c: ")
+        if choice.lower() == 'a':
+            # cargo_quantity()
+            print('a')
+            return
+        elif choice.lower() == 'b':
+            print('b')
+            new_pax = passenger_quantity(type)
+            type.pax = new_pax
+            return
+        elif choice.lower() == 'c':
+            new_fuel = fuel_quantity(type)
+            type.fuel = new_fuel
+            print('c')
+            return
+        else:
+            print(f"The take off weight is {tow}kg")
+            return tow
+
+
 def main():
     """
     Runs the application on loading the browser.
@@ -186,8 +222,10 @@ def main():
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
     calculate_underload(aircraft, fuel)
-    pax = passenger_quantity(aircraft)
+    customers = passenger_quantity(aircraft)
+    pax, pax_weight = customers
     load_passengers(aircraft, pax)
+    check_max_weight(aircraft, pax_weight)
     print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
     print(f"of fuel and {aircraft.pax} passengers.")
 

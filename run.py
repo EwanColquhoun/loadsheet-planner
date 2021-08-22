@@ -127,7 +127,8 @@ def calculate_underload(aircraft, fuel):
     weight the aircraft can carry. i.e passengers and cargo.
     """
     underload = int(aircraft.mtow) - int(aircraft.eWeight) - int(aircraft.fuel)
-    typing(f"The underload before passenger and cargo is {underload}kg\n", 0.02) 
+    typing(f"The underload before passenger and cargo is {underload}kg\n", 0.02)
+    return underload 
 
 
 def passenger_quantity(type):
@@ -141,15 +142,17 @@ def passenger_quantity(type):
     print()
     typing("Passenger quantity...\n", 0.02)
     typing("Passenger weights are 86kg for adults and 35kg for children\n", 0.02)
-    pax = input("Please enter the passenger load in number of passengers: ")
-    pax_weight = int(pax) * 86
+    adult_pax = input("Please enter the number of ADULT passengers: ")
+    child_pax = input("Please enter the number of CHILD passengers: ")
+    pax_weight = (int(adult_pax) * 86) + (int(child_pax) * 35)
+    pax = int(adult_pax) + int(child_pax)
 
     try:
-        if int(pax) == '':
+        if int(adult_pax) | int(child_pax) == '':
             print()
             print("-----PLEASE ENTER 0 IF NO PASSENGERS-----")
             passenger_quantity(type)
-        elif int(pax) > type.maxPax:
+        elif pax > type.maxPax:
             print()
             print("-----PASSENGER FIGURE TOO HIGH------")
             print(f"Max for the {type.model} is {type.maxPax} passengers.")
@@ -210,7 +213,7 @@ def check_max_weight(type, weight):
             return
         else:
             print(f"The take off weight is {tow}kg")
-            return tow
+    return tow
 
 
 def main():
@@ -221,14 +224,14 @@ def main():
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
-    calculate_underload(aircraft, fuel)
-    customers = passenger_quantity(aircraft)
-    pax, pax_weight = customers
+    underload = calculate_underload(aircraft, fuel)
+    pax, pax_weight = passenger_quantity(aircraft)
     load_passengers(aircraft, pax)
-    check_max_weight(aircraft, pax_weight)
+    tow = check_max_weight(aircraft, pax_weight)
     print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
     print(f"of fuel and {aircraft.pax} passengers.")
-
+    print(f"The Take-off weight is {tow}kg")
+    print(f"Maximum is {aircraft.mtow}kg - ({underload - pax_weight}kg)")
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '170000',

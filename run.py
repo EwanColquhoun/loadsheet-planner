@@ -52,7 +52,7 @@ def select_aircraft():
     if the input is invalid (not a,b or c) it returns an error and asks
     the user to try again.
     """
-    aircraft_type = input("Please select the aircraft, enter a, b or c: ")
+    aircraft_type = input("Please select the aircraft, enter a, b or c: \n")
 
     if aircraft_type.lower() == 'a':
         aircraft_a = 'Boeing 747-400'
@@ -86,7 +86,7 @@ def fuel_quantity(type):
     minFuel = round(0.05 * type.maxFuel)
     typing(f"The maximum fuel is {type.maxFuel}kg\n", 0.02)
     typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
-    fuel = input("Please enter the total fuel in kg. eg, 140000, 8000, 1200: ")
+    fuel = input("Please enter the total fuel in kg. eg, 140000, 8000, 1200: \n")
 
     try:
         if int(fuel) <= minFuel:
@@ -146,8 +146,8 @@ def passenger_quantity(type):
     print()
     typing("Passenger quantity...\n", 0.02)
     typing("Passenger weights are 86kg for adults and 35kg for children\n", 0.02)
-    adult_pax = input("Please enter the number of ADULT passengers: ")
-    child_pax = input("Please enter the number of CHILD passengers: ")
+    adult_pax = input("Please enter the number of ADULT passengers: \n")
+    child_pax = input("Please enter the number of CHILD passengers: \n")
     pax_weight = (int(adult_pax) * 86) + (int(child_pax) * 35)
     pax = int(adult_pax) + int(child_pax)
 
@@ -200,7 +200,7 @@ def check_max_weight(type, weight):
         print("a) Cargo")
         print("b) Passengers")
         print("c) Fuel\n")
-        choice = input("Please select a, b or c: ")
+        choice = input("Please select a, b or c: \n")
         if choice.lower() == 'a':
             # cargo_quantity()
             print('a')

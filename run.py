@@ -54,7 +54,6 @@ def select_aircraft():
     """
     while True:
         aircraft_type = input("Please select the aircraft, enter a, b or c: \n")
-
         if aircraft_type.lower() == 'a':
             aircraft_a = 'Boeing 747-400'
             print(f"You have chosen the {aircraft_a}\n")
@@ -148,14 +147,18 @@ def passenger_quantity(type):
         print()
         typing("Passenger quantity...\n", 0.02)
         typing("Passenger weights are 86kg for adults and 35kg for children\n", 0.02)
+        typing("Each passenger is assumed to have 15kg of hand luggage.\n", 0.02)
         adult_pax = input("Please enter the number of ADULT passengers: \n")
         child_pax = input("Please enter the number of CHILD passengers: \n")
         pax = ''
         pax_weight = ''
+        bag_weight = ''
 
         try:
             pax = int(adult_pax) + int(child_pax)
             pax_weight = (int(adult_pax) * 86) + (int(child_pax) * 35)
+            bag_weight = int(pax) * 15
+
             if int(adult_pax) | int(child_pax) == '':
                 print()
                 print("-----PLEASE ENTER 0 IF NO PASSENGERS-----")
@@ -165,9 +168,9 @@ def passenger_quantity(type):
                 print(f"Max for the {type.model} is {type.maxPax} passengers.")
             else:
                 typing(f"{pax} is valid and has been accepted.\n", 0.02)
-                print(f"The passenger weight is {pax_weight}kg")
+                print(f"The passenger weight is {int(pax_weight) + int(bag_weight)}kg")
                 print()
-                return pax, pax_weight
+                return pax, pax_weight, bag_weight
         except ValueError:
             print()
             print("Please enter passenger figure as a whole number only.")
@@ -189,55 +192,56 @@ def load_passengers(type, pax):
         return
 
 
-def check_max_weight(type, weight):
+def check_max_weight(type, weight, bags):
     """
     Performs a calculation to see if the aircrafts take-off
     weight it acceptable. Dependant on fuel and passenger load.
     """
-    tow = int(type.eWeight) + int(weight) + int(type.fuel)
-    if tow > type.mtow:
-        print()
-        print(f"The take off weight is {tow}kg, maximum is {type.mtow}kg")
-        print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
-        print("Please remove cargo, passengers or fuel:")
-        print("a) Cargo")
-        print("b) Passengers")
-        print("c) Fuel\n")
-        choice = input("Please select a, b or c: \n")
-        if choice.lower() == 'a':
-            pass # cargo function to go here
-        elif choice.lower() == 'b':
-            new_pax = passenger_quantity(type)
-            type.pax = new_pax
-            return
-        elif choice.lower() == 'c':
-            new_fuel = fuel_quantity(type)
-            type.fuel = new_fuel
-            return
+    while True:
+        tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
+        if tow > type.mtow:
+            print()
+            typing(f"The take off weight is {tow}kg, maximum is {type.mtow}kg\n", 0.02)
+            print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
+            typing("Please remove cargo, passengers or fuel:\n", 0.02)
+            print("a) Cargo")
+            print("b) Passengers")
+            print("c) Fuel\n")
+            choice = input("Please select a, b or c: \n")
+            if choice.lower() == 'a':
+                pass  # cargo function to go here
+            elif choice.lower() == 'b':
+                new_pax = passenger_quantity(type)
+                type.pax = new_pax
+                tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
+            elif choice.lower() == 'c':
+                new_fuel = fuel_quantity(type)
+                type.fuel = new_fuel
+                tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
+            else:
+                return
         else:
-            print(f"The take off weight is {tow}kg, maximum is {type.mtow}kg")
-    return tow
+            return tow
 
 
 def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()
+    # opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
     underload = calculate_underload(aircraft, fuel)
-    pax, pax_weight = passenger_quantity(aircraft)
+    pax, pax_weight, bag_weight = passenger_quantity(aircraft)
     load_passengers(aircraft, pax)
-    print(pax_weight)
-    tow = check_max_weight(aircraft, pax_weight)
+    new_tow = check_max_weight(aircraft, pax_weight, bag_weight)
 
     print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
     print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
     print(f"of fuel and {aircraft.pax} passengers.")
-    print(f"The Take-off weight is {tow}kg")
-    print(f"Maximum is {aircraft.mtow}kg - ({underload - pax_weight}kg)")
+    print(f"The Take-off weight is {new_tow}kg")
+    print(f"Maximum is {aircraft.mtow}kg - ({aircraft.mtow - new_tow}kg)")
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '170000',

@@ -3,7 +3,7 @@ from functions import typing
 
 def opening_text():
     """
-    Displays the opening text. details what aircraft are available to select.
+    Displays the opening text. Displays what aircraft are available to select.
     """
     typing("        Welcome to the Loadsheet Planner\n", 0.02)
     typing("   ....Retrieving the database of Aircraft....\n", 0.02)
@@ -31,6 +31,10 @@ def opening_text():
 class Aircraft:
     """
     Creates an instance of an Aircraft
+    maxPax = maximum passengers,
+    pax = number of passengers,
+    eWeight = empyt weight of the aircraft without fuel, cargo and pax,
+    mtow = Maximum allowed take-off weight.
     """
     def __init__(self, model, maxPax, pax, maxFuel, fuel, eWeight, mtow):
         self.model = model
@@ -78,7 +82,7 @@ def fuel_quantity(type):
     inputted the value is checked to ensure it is in the correct range.
     An error is thrown if the value isn't a whole number.
     """
-    typing("Fuel quantity...", 0.02)
+    typing("Fuel quantity...\n", 0.02)
     minFuel = round(0.05 * type.maxFuel)
     typing(f"The maximum fuel is {type.maxFuel}kg\n", 0.02)
     typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
@@ -128,7 +132,7 @@ def calculate_underload(aircraft, fuel):
     """
     underload = int(aircraft.mtow) - int(aircraft.eWeight) - int(aircraft.fuel)
     typing(f"The underload before passenger and cargo is {underload}kg\n", 0.02)
-    return underload 
+    return underload
 
 
 def passenger_quantity(type):
@@ -169,7 +173,7 @@ def passenger_quantity(type):
 
 def load_passengers(type, pax):
     """
-
+    Adds the number of passengers to the instance of Aircraft.
     """
     if type == jumbo:
         jumbo.pax = pax
@@ -190,7 +194,7 @@ def check_max_weight(type, weight):
     tow = int(type.eWeight) + int(weight) + int(type.fuel)
     if tow > type.mtow:
         print()
-        print(f"The take off weight is {tow}kg")
+        print(f"The take off weight is {tow}kg, maximum is {aircraft.mtow}kg")
         print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
         print("Please remove cargo, passengers or fuel:")
         print("a) Cargo")
@@ -212,7 +216,7 @@ def check_max_weight(type, weight):
             print('c')
             return
         else:
-            print(f"The take off weight is {tow}kg")
+            print(f"The take off weight is {tow}kg, maximum is {aircraft.mtow}kg")
     return tow
 
 
@@ -220,7 +224,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    # opening_text()
+    opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
@@ -228,6 +232,8 @@ def main():
     pax, pax_weight = passenger_quantity(aircraft)
     load_passengers(aircraft, pax)
     tow = check_max_weight(aircraft, pax_weight)
+
+    print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
     print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
     print(f"of fuel and {aircraft.pax} passengers.")
     print(f"The Take-off weight is {tow}kg")

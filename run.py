@@ -178,9 +178,6 @@ def load_passengers(type, pax):
     Calculates the passenger weight then adds
     the number of passengers to the instance of Aircraft.
     """
-    # pax_weight = (int(adult_pax) * 86) + (int(child_pax) * 35)
-    # print(f"The passenger weight is {pax_weight}kg")
-
     if type == jumbo:
         jumbo.pax = pax
         return
@@ -208,18 +205,14 @@ def check_max_weight(type, weight):
         print("c) Fuel\n")
         choice = input("Please select a, b or c: \n")
         if choice.lower() == 'a':
-            # cargo_quantity()
-            print('a')
-            return
+            pass # cargo function to go here
         elif choice.lower() == 'b':
-            print('b')
             new_pax = passenger_quantity(type)
             type.pax = new_pax
             return
         elif choice.lower() == 'c':
             new_fuel = fuel_quantity(type)
             type.fuel = new_fuel
-            print('c')
             return
         else:
             print(f"The take off weight is {tow}kg, maximum is {type.mtow}kg")
@@ -230,7 +223,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    # opening_text()
+    opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)

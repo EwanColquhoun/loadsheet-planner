@@ -53,24 +53,24 @@ def select_aircraft():
     the user to try again.
     """
     while True:
-        aircraft_type = input("Please select the aircraft, enter a, b or c: \n")
-        if aircraft_type.lower() == 'a':
+        ac_type = input("Please select the aircraft, enter a, b or c: \n")
+        if ac_type.lower() == 'a':
             aircraft_a = 'Boeing 747-400'
             print(f"You have chosen the {aircraft_a}\n")
             return jumbo
-        elif aircraft_type.lower() == 'b':
+        elif ac_type.lower() == 'b':
             aircraft_b = 'Embraer 190'
             print(f"You have chosen the {aircraft_b}\n")
             return ejet
-        elif aircraft_type.lower() == 'c':
+        elif ac_type.lower() == 'c':
             aircraft_c = 'Jetstream 41'
             print(f"You have chosen the {aircraft_c}\n")
             return jetstream
         else:
             print()
-            print(f"-----You selected {aircraft_type}------")
+            print(f"-----You selected {ac_type}------")
             print("------That wasn't a valid aircraft------")
-            print("Please select your aircraft from the options a, b or c.\n")    
+            print("Please select your aircraft from the options a, b or c.\n")
 
     return
 
@@ -83,13 +83,13 @@ def fuel_quantity(type):
     inputted the value is checked to ensure it is in the correct range.
     An error is thrown if the value isn't a whole number.
     """
-    
     while True:
         typing("Fuel quantity...\n", 0.02)
         minFuel = round(0.05 * type.maxFuel)
         typing(f"The maximum fuel is {type.maxFuel}kg\n", 0.02)
         typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
-        fuel = input("Please enter the total fuel in kg. eg, 140000, 8000, 1200: \n")
+        fuel = input("Please enter the total fuel in kg. "
+                     "eg, 140000, 8000, 1200: \n")
 
         try:
             if int(fuel) <= minFuel:
@@ -131,7 +131,8 @@ def calculate_underload(aircraft, fuel):
     weight the aircraft can carry. i.e passengers and cargo.
     """
     underload = int(aircraft.mtow) - int(aircraft.eWeight) - int(aircraft.fuel)
-    typing(f"The underload before passenger and cargo is {underload}kg\n", 0.02)
+    typing(f"The underload before passengers and "
+        f"cargo is {underload}kg\n", 0.02)
     return underload
 
 
@@ -142,12 +143,13 @@ def passenger_quantity(type):
     It checks for validity both in type and quantity and feedsback to the
     user if there are any errors or if they are successful with their input.
     """
-    
     while True:
         print()
         typing("Passenger quantity...\n", 0.02)
-        typing("Passenger weights are 86kg for adults and 35kg for children\n", 0.02)
-        typing("Each passenger is assumed to have 15kg of hand luggage.\n", 0.02)
+        typing("Passenger weights are 86kg for "
+            "adults and 35kg for children\n", 0.02)
+        typing("Each passenger is assumed to "
+            "have 15kg of hand luggage.\n", 0.02)
         adult_pax = input("Please enter the number of ADULT passengers: \n")
         child_pax = input("Please enter the number of CHILD passengers: \n")
         pax = ''
@@ -168,7 +170,8 @@ def passenger_quantity(type):
                 print(f"Max for the {type.model} is {type.maxPax} passengers.")
             else:
                 typing(f"{pax} is valid and has been accepted.\n", 0.02)
-                print(f"The passenger weight is {int(pax_weight) + int(bag_weight)}kg")
+                print(f"The passenger weight "
+                     f"is {int(pax_weight) + int(bag_weight)}kg")
                 print()
                 return pax, pax_weight, bag_weight
         except ValueError:
@@ -201,7 +204,8 @@ def check_max_weight(type, weight, bags):
         tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
         if tow > type.mtow:
             print()
-            typing(f"The take off weight is {tow}kg, maximum is {type.mtow}kg\n", 0.02)
+            typing(f"The take off weight is {tow}kg, "
+                f"maximum is {type.mtow}kg\n", 0.02)
             print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
             typing("Please remove cargo, passengers or fuel:\n", 0.02)
             print("a) Cargo")
@@ -211,13 +215,21 @@ def check_max_weight(type, weight, bags):
             if choice.lower() == 'a':
                 pass  # cargo function to go here
             elif choice.lower() == 'b':
-                new_pax = passenger_quantity(type)
+                new_pax, pax_weight, bag_weight = passenger_quantity(type)
                 type.pax = new_pax
-                tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
+                tow = (int(type.eWeight) 
+                        + int(new_pax)
+                        + int(bags)
+                        + int(type.fuel))
+                return tow
             elif choice.lower() == 'c':
                 new_fuel = fuel_quantity(type)
                 type.fuel = new_fuel
-                tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
+                tow = (int(type.eWeight) 
+                        + int(new_pax)
+                        + int(bags)
+                        + int(type.fuel))
+                return tow
             else:
                 return
         else:
@@ -244,8 +256,8 @@ def main():
     print(f"Maximum is {aircraft.mtow}kg - ({aircraft.mtow - new_tow}kg)")
 
 
-jumbo = Aircraft('Boeing 747-400', '331', '0', '170000',
-                '0', '183500', '396000')
+jumbo = Aircraft('Boeing 747-400', '331', '0', '170000', 
+    '0', '183500', '396000')
 ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '28000', '45990')
 jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '6400', '10800')
 

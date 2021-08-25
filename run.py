@@ -36,12 +36,13 @@ class Aircraft:
     eWeight = empyt weight of the aircraft without fuel, cargo and pax,
     mtow = Maximum allowed take-off weight.
     """
-    def __init__(self, model, maxPax, pax, maxFuel, fuel, eWeight, mtow):
+    def __init__(self, model, maxPax, pax, maxFuel, fuel, cargo, eWeight, mtow):
         self.model = model
         self.maxPax = int(maxPax)
         self.pax = int(pax)
         self.maxFuel = int(maxFuel)
         self.fuel = int(fuel)
+        self.cargo = int(cargo)
         self.eWeight = int(eWeight)
         self.mtow = int(mtow)
 
@@ -125,14 +126,18 @@ def load_fuel(fuel, type):
         return
 
 
-def calculate_underload(aircraft, fuel):
+def calculate_underload(aircraft, fuel, pax_weight, bag_weight):
     """
     Calculates the useful load to the user. This indicated how much additional
     weight the aircraft can carry. i.e passengers and cargo.
     """
-    underload = int(aircraft.mtow) - int(aircraft.eWeight) - int(aircraft.fuel)
-    typing(f"The underload before passengers and "
-        f"cargo is {underload}kg\n", 0.02)
+    underload = (int(aircraft.mtow)
+        - int(aircraft.eWeight)
+        - int(aircraft.fuel)
+        - int(pax_weight)
+        - int(bag_weight))
+
+    typing(f"The underload before cargo is {underload}kg\n", 0.02)
     return underload
 
 
@@ -195,13 +200,54 @@ def load_passengers(type, pax):
         return
 
 
-def check_max_weight(type, weight, bags):
+def cargo_quantity(underload):
+    """
+    Inputs the amount of cargo for the flight in kg. Validates the input.
+    """
+    while True:
+        print()
+        typing("Cargo quantity...\n", 0.02)
+        typing("Cargo is loaded if you have any spare underload.\n", 0.02)
+        typing(f"Your underload is {underload}kg.\n", 0.02)
+        cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
+       
+        try:
+            
+            if cargo_load == '':
+                print()
+                print("-----PLEASE ENTER 0 IF NO CARGO-----")
+            elif int(cargo_load) > int(underload):
+                print()
+                print("-----CARGO QUANTITY TOO HIGH------")
+                print(f"Max cargo is {underload}kg.")
+            else:
+                typing(f"{cargo_load} is valid and has been accepted.\n", 0.02)
+                return cargo_load
+        except ValueError:
+            print()
+            print("Please enter cargo figure as a whole number only.")
+
+
+def load_cargo(type, cargo):
+    """
+    Loads the cargo onto the Aircraft class.
+    """
+    type.cargo = cargo
+    print(f'the {type.model} has {type.cargo}kg of cargo')
+
+
+def check_max_weight(type, weight, bags, cargo):
     """
     Performs a calculation to see if the aircrafts take-off
     weight it acceptable. Dependant on fuel and passenger load.
     """
     while True:
-        tow = int(type.eWeight) + int(weight) + int(bags) + int(type.fuel)
+        tow = (int(type.eWeight)
+        + int(weight)
+        + int(bags)
+        + int(cargo)
+        + int(type.fuel))
+
         if tow > type.mtow:
             print()
             typing(f"The take off weight is {tow}kg, "
@@ -213,22 +259,30 @@ def check_max_weight(type, weight, bags):
             print("c) Fuel\n")
             choice = input("Please select a, b or c: \n")
             if choice.lower() == 'a':
-                pass  # cargo function to go here
+                new_cargo = cargo_quantity(underload)
+                type.cargo = new_cargo
+                tow = (int(type.eWeight)
+                    + int(weight)
+                    + int(bags)
+                    + int(cargo)
+                    + int(type.fuel))
             elif choice.lower() == 'b':
                 new_pax, pax_weight, bag_weight = passenger_quantity(type)
                 type.pax = new_pax
-                tow = (int(type.eWeight) 
-                        + int(new_pax)
-                        + int(bags)
-                        + int(type.fuel))
+                tow = (int(type.eWeight)
+                    + int(new_pax)
+                    + int(bags)
+                    + int(cargo)
+                    + int(type.fuel))
                 return tow
             elif choice.lower() == 'c':
                 new_fuel = fuel_quantity(type)
                 type.fuel = new_fuel
-                tow = (int(type.eWeight) 
-                        + int(new_pax)
-                        + int(bags)
-                        + int(type.fuel))
+                tow = (int(type.eWeight)
+                    + int(new_pax)
+                    + int(bags)
+                    + int(cargo)
+                    + int(type.fuel))
                 return tow
             else:
                 return
@@ -244,10 +298,12 @@ def main():
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
-    underload = calculate_underload(aircraft, fuel)
     pax, pax_weight, bag_weight = passenger_quantity(aircraft)
     load_passengers(aircraft, pax)
-    new_tow = check_max_weight(aircraft, pax_weight, bag_weight)
+    underload = calculate_underload(aircraft, fuel, pax_weight, bag_weight)
+    cargo = cargo_quantity(underload)
+    load_cargo(aircraft, cargo)
+    new_tow = check_max_weight(aircraft, pax_weight, bag_weight, cargo)
 
     print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
     print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
@@ -256,10 +312,10 @@ def main():
     print(f"Maximum is {aircraft.mtow}kg - ({aircraft.mtow - new_tow}kg)")
 
 
-jumbo = Aircraft('Boeing 747-400', '331', '0', '170000', 
+jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000', 
     '0', '183500', '396000')
-ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '28000', '45990')
-jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '6400', '10800')
+ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '0', '28000', '45990')
+jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '0', '6400', '10800')
 
 fleet = (jumbo, ejet, jetstream)
 main()

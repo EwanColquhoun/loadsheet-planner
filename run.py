@@ -204,11 +204,20 @@ def cargo_quantity(underload):
     """
     Inputs the amount of cargo for the flight in kg. Validates the input.
     """
+    cargo_load = 0
+    if '-' in str(underload):
+        print()
+        typing("Cargo quantity...\n", 0.02)
+        typing("Cargo is loaded if you have any spare underload.\n", 0.02)
+        typing(f"Your underload is {underload}kg.\n", 0.02)
+        print('Your aircraft is too heavy for cargo today')
+        return cargo_load
     while True:
         print()
         typing("Cargo quantity...\n", 0.02)
         typing("Cargo is loaded if you have any spare underload.\n", 0.02)
         typing(f"Your underload is {underload}kg.\n", 0.02)
+
         cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
        
         try:
@@ -236,7 +245,7 @@ def load_cargo(type, cargo):
     print(f'the {type.model} has {type.cargo}kg of cargo')
 
 
-def check_max_weight(type, weight, bags, cargo):
+def check_max_weight(type, weight, bags, cargo, underload):
     """
     Performs a calculation to see if the aircrafts take-off
     weight it acceptable. Dependant on fuel and passenger load.
@@ -294,7 +303,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()
+    #  opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
@@ -302,14 +311,17 @@ def main():
     load_passengers(aircraft, pax)
     underload = calculate_underload(aircraft, fuel, pax_weight, bag_weight)
     cargo = cargo_quantity(underload)
+    new_tow = check_max_weight(aircraft, pax_weight, bag_weight, cargo, underload)
     load_cargo(aircraft, cargo)
-    new_tow = check_max_weight(aircraft, pax_weight, bag_weight, cargo)
 
     print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
-    print(f"Total load on {aircraft.model} is {aircraft.fuel}kg")
-    print(f"of fuel and {aircraft.pax} passengers.")
-    print(f"The Take-off weight is {new_tow}kg")
-    print(f"Maximum is {aircraft.mtow}kg - ({aircraft.mtow - new_tow}kg)")
+    print(f"{aircraft.model}")
+    print(f'Basic Weight: {aircraft.eWeight}kg')
+    print(f'Fuel in tanks: {aircraft.fuel}kg')
+    print(f"Passengers: {aircraft.pax}.")
+    print(f'Cargo: {aircraft.cargo}kg')
+    print(f"TOW: {new_tow}kg")
+    print(f"Maximum is {aircraft.mtow}kg")
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000', 

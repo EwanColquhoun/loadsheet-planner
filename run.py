@@ -11,12 +11,12 @@ def opening_text():
     typing('                         |                         \n', 0.005)
     typing('                         |                         \n', 0.005)
     typing('                         |                         \n', 0.005)
-    typing('                        /|\                        \n', 0.005)
+    typing('                        /|\\                        \n', 0.005)
     typing('                     .-`   `-.                     \n', 0.005)
     typing('             _______:  -----  :_______             \n', 0.005)
     typing('                    |         |                    \n', 0.005)
-    typing(' \__________________:    o    :__________________/ \n', 0.005)
-    typing("   '''.-^-.' '.-^-.''\       /''.-^-.' '.-^-.'''    \n", 0.005)
+    typing(' \\__________________:    o    :__________________/ \n', 0.005)
+    typing("   '''.-^-.' '.-^-.''\\       /''.-^-.' '.-^-.'''    \n", 0.005)
     typing("      '___'   '___'   ''---''   '___'   '___'       \n", 0.005)
     print()
     typing("-----By Ewan Colquhoun - not for operational use-----\n", 0.02)
@@ -36,10 +36,12 @@ class Aircraft:
     eWeight = empyt weight of the aircraft without fuel, cargo and pax,
     mtow = Maximum allowed take-off weight.
     """
-    def __init__(self, model, maxPax, pax, maxFuel, fuel, cargo, eWeight, mtow):
+    def __init__(self, model, maxPax, pax, traffic_load, maxFuel,
+                 fuel, cargo, eWeight, mtow):
         self.model = model
         self.maxPax = int(maxPax)
         self.pax = int(pax)
+        self.traffic_load = int(traffic_load)
         self.maxFuel = int(maxFuel)
         self.fuel = int(fuel)
         self.cargo = int(cargo)
@@ -126,22 +128,21 @@ def load_fuel(fuel, type):
         return
 
 
-def calculate_underload(aircraft, fuel, pax_weight, bag_weight):
+def calculate_underload(aircraft, fuel, traffic_load):
     """
     Calculates the useful load to the user. This indicated how much additional
     weight the aircraft can carry. i.e passengers and cargo.
     """
     underload = (int(aircraft.mtow)
-        - int(aircraft.eWeight)
-        - int(aircraft.fuel)
-        - int(pax_weight)
-        - int(bag_weight))
+                 - int(aircraft.eWeight)
+                 - int(aircraft.fuel)
+                 - int(traffic_load))
 
     typing(f"The underload before cargo is {underload}kg\n", 0.02)
     return underload
 
 
-def passenger_quantity(type):
+def passenger_quantity(aircraft):
     """
     Defines the maximum quantity of passengers available to upload based on the
     underload the aircraft has. It asks for an input of passenger numbers.
@@ -151,10 +152,11 @@ def passenger_quantity(type):
     while True:
         print()
         typing("Passenger quantity...\n", 0.02)
+        typing(f"Maximum number of passengers is {aircraft.maxPax}.\n", 0.02)
         typing("Passenger weights are 86kg for "
-            "adults and 35kg for children\n", 0.02)
+               "adults and 35kg for children\n", 0.02)
         typing("Each passenger is assumed to "
-            "have 15kg of hand luggage.\n", 0.02)
+               "have 15kg of hand luggage.\n", 0.02)
         adult_pax = input("Please enter the number of ADULT passengers: \n")
         child_pax = input("Please enter the number of CHILD passengers: \n")
         pax = ''
@@ -165,38 +167,43 @@ def passenger_quantity(type):
             pax = int(adult_pax) + int(child_pax)
             pax_weight = (int(adult_pax) * 86) + (int(child_pax) * 35)
             bag_weight = int(pax) * 15
+            traffic_load = int(pax_weight) + int(bag_weight)
 
             if int(adult_pax) | int(child_pax) == '':
                 print()
                 print("-----PLEASE ENTER 0 IF NO PASSENGERS-----")
-            elif int(adult_pax) + int(child_pax) > type.maxPax:
+            elif int(adult_pax) + int(child_pax) > aircraft.maxPax:
                 print()
                 print("-----PASSENGER FIGURE TOO HIGH------")
-                print(f"Max for the {type.model} is {type.maxPax} passengers.")
+                print(f"Max for the {aircraft.model} is "
+                      f"{aircraft.maxPax} passengers.")
             else:
                 typing(f"{pax} is valid and has been accepted.\n", 0.02)
                 print(f"The passenger weight "
-                     f"is {int(pax_weight) + int(bag_weight)}kg")
+                      f"is {traffic_load}kg")
                 print()
-                return pax, pax_weight, bag_weight
+                return pax, traffic_load
         except ValueError:
             print()
             print("Please enter passenger figure as a whole number only.")
 
 
-def load_passengers(type, pax):
+def load_passengers(type, pax, traffic_load):
     """
     Calculates the passenger weight then adds
     the number of passengers to the instance of Aircraft.
     """
     if type == jumbo:
         jumbo.pax = pax
+        jumbo.traffic_load = traffic_load
         return
     elif type == ejet:
         ejet.pax = pax
+        ejet.traffic_load = traffic_load
         return
     elif type == jetstream:
         jetstream.pax = pax
+        jetstream.traffic_load = traffic_load
         return
 
 
@@ -209,19 +216,19 @@ def cargo_quantity(underload):
         print()
         typing("Cargo quantity...\n", 0.02)
         typing("Cargo is loaded if you have any spare underload.\n", 0.02)
-        typing(f"Your underload is {underload}kg.\n", 0.02)
-        print('Your aircraft is too heavy for cargo today')
+        typing(f"Your underload is {underload}kg"
+               f" (minus means 'too heavy by')\n", 0.02)
+        print()
+        print('----Your aircraft is too heavy for cargo today----')
         return cargo_load
     while True:
         print()
         typing("Cargo quantity...\n", 0.02)
         typing("Cargo is loaded if you have any spare underload.\n", 0.02)
         typing(f"Your underload is {underload}kg.\n", 0.02)
-
         cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
 
         try:
-            
             if cargo_load == '':
                 print()
                 print("-----PLEASE ENTER 0 IF NO CARGO-----")
@@ -245,56 +252,40 @@ def load_cargo(type, cargo):
     print(f'the {type.model} has {type.cargo}kg of cargo')
 
 
-def check_max_weight(type, weight, bags, cargo, underload):
+def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
     """
     Performs a calculation to see if the aircrafts take-off
     weight it acceptable. Dependant on fuel and passenger load.
     """
     while True:
-        tow = (int(type.eWeight)
-        + int(weight)
-        + int(bags)
-        + int(cargo)
-        + int(type.fuel))
+        tow = (int(aircraft.eWeight)
+               + int(aircraft.traffic_load)
+               + int(aircraft.cargo)
+               + int(aircraft.fuel))
 
-        if tow > type.mtow:
+        if tow > aircraft.mtow:
             print()
             typing(f"The take off weight is {tow}kg, "
-                f"maximum is {type.mtow}kg\n", 0.02)
+                   f"maximum is {aircraft.mtow}kg\n", 0.02)
             print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
             typing("Please remove cargo, passengers or fuel:\n", 0.02)
             print("a) Cargo")
             print("b) Passengers")
             print("c) Fuel\n")
             choice = input("Please select a, b or c: \n")
+
             if choice.lower() == 'a':
                 new_cargo = cargo_quantity(underload)
-                type.cargo = new_cargo
-                tow = (int(type.eWeight)
-                    + int(weight)
-                    + int(bags)
-                    + int(cargo)
-                    + int(type.fuel))
+                aircraft.cargo = new_cargo
             elif choice.lower() == 'b':
-                new_pax, pax_weight, bag_weight = passenger_quantity(type)
-                type.pax = new_pax
-                tow = (int(type.eWeight)
-                    + int(new_pax)
-                    + int(bags)
-                    + int(cargo)
-                    + int(type.fuel))
-                return tow
+                new_pax, new_traffic_load = passenger_quantity(aircraft)
+                aircraft.pax = new_pax
+                aircraft.traffic_load = new_traffic_load
             elif choice.lower() == 'c':
-                new_fuel = fuel_quantity(type)
-                type.fuel = new_fuel
-                tow = (int(type.eWeight)
-                    + int(new_pax)
-                    + int(bags)
-                    + int(cargo)
-                    + int(type.fuel))
-                return tow
+                new_fuel = fuel_quantity(aircraft)
+                aircraft.fuel = new_fuel
             else:
-                return
+                return tow
         else:
             return tow
 
@@ -307,11 +298,11 @@ def main():
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     load_fuel(fuel, aircraft)
-    pax, pax_weight, bag_weight = passenger_quantity(aircraft)
-    load_passengers(aircraft, pax)
-    underload = calculate_underload(aircraft, fuel, pax_weight, bag_weight)
+    pax, traffic_load = passenger_quantity(aircraft)
+    load_passengers(aircraft, pax, traffic_load)
+    underload = calculate_underload(aircraft, fuel, traffic_load)
     cargo = cargo_quantity(underload)
-    new_tow = check_max_weight(aircraft, pax_weight, bag_weight, cargo, underload)
+    new_tow = check_max_weight(aircraft, traffic_load, cargo, fuel, underload)
     load_cargo(aircraft, cargo)
 
     print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
@@ -319,14 +310,19 @@ def main():
     print(f'Basic Weight: {aircraft.eWeight}kg')
     print(f'Fuel in tanks: {aircraft.fuel}kg')
     print(f"Passengers: {aircraft.pax}.")
+    print(f'Traffic Load: {aircraft.traffic_load}kg')
     print(f'Cargo: {aircraft.cargo}kg')
+    print(f'Underload: {int(aircraft.mtow) - int(new_tow)}kg')
     print(f"TOW: {new_tow}kg")
     print(f"Maximum is {aircraft.mtow}kg")
 
 
-jumbo = Aircraft('Boeing 747-400', '331', '0', '170000', '0', '0', '183500', '396000')
-ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '0', '28000', '45990')
-jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '0', '6400', '10800')
+jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000',
+                 '0', '0', '183500', '396000')
+ejet = Aircraft('Embraer 190', '98', '0', '0', '12900', '0',
+                '0', '28000', '45990')
+jetstream = Aircraft('Jetstream 41', '29', '0', '0', '2700',
+                     '0', '0', '6400', '10800')
 
 fleet = (jumbo, ejet, jetstream)
 main()

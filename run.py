@@ -219,7 +219,7 @@ def cargo_quantity(underload):
         typing(f"Your underload is {underload}kg.\n", 0.02)
 
         cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
-       
+
         try:
             
             if cargo_load == '':
@@ -324,8 +324,7 @@ def main():
     print(f"Maximum is {aircraft.mtow}kg")
 
 
-jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000', 
-    '0', '183500', '396000')
+jumbo = Aircraft('Boeing 747-400', '331', '0', '170000', '0', '0', '183500', '396000')
 ejet = Aircraft('Embraer 190', '98', '0', '12900', '0', '0', '28000', '45990')
 jetstream = Aircraft('Jetstream 41', '29', '0', '2700', '0', '0', '6400', '10800')
 

@@ -3,7 +3,7 @@
 The Loadsheet planner application is designed for use by an airline dispatcher to quickly calculate the acceptable loads whilst preparing an aircraft for dispatch. <br>
 It is designed to take a number of inputs from the user to narrow down the acceptable fuel and passenger load available to them. In this scenario the fuel and passenger load would have already been passed from the company and Flight Crew respectively.
 
-To try your hand planning a loadsheet please click [**here**]{############}.
+To try your hand planning a loadsheet please click [**here**]{https://loadsheet-planner.herokuapp.com/}.
 
 ![Image of the deployed application](################)
 

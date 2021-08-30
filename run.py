@@ -390,7 +390,7 @@ def main():
     print_loadsheet(aircraft, adults, children)
     output_pdf(aircraft, adults, children)
     new = 2
-    url = "https://github.com/EwanColquhoun/loadsheet-planner/blob/main/loadsheet.pdf"
+    url = "/workspace/loadsheet-planner/loadsheet.pdf"
     webbrowser.open(url, new=new)
     another_flight()
 

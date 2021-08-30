@@ -23,12 +23,12 @@ def opening_text():
     typing("   '''.-^-.' '.-^-.''\\       /''.-^-.' '.-^-.'''    \n", 0.005)
     typing("      '___'   '___'   ''---''   '___'   '___'       \n", 0.005)
     print()
-    typing("-----By Ewan Colquhoun - not for operational use-----\n", 0.03)
+    typing("-----By Ewan Colquhoun - not for operational use-----\n", 0.02)
     print()
-    typing("You have 3 aircraft available to load:\n", 0.03)
-    typing("a) Boeing 747-400\n", 0.03)
-    typing("b) Embraer 190\n", 0.03)
-    typing("c) Jetstream 41\n", 0.03)
+    typing("You have 3 aircraft available to load:\n", 0.02)
+    typing("a) Boeing 747-400\n", 0.02)
+    typing("b) Embraer 190\n", 0.02)
+    typing("c) Jetstream 41\n", 0.02)
     print()
 
 
@@ -92,11 +92,10 @@ def fuel_quantity(aircraft):
     An error is thrown if the value isn't a whole number.
     """
     while True:
-        typing("Fuel quantity...\n", 0.03)
-        time.sleep(0.5)
-        minFuel = round(0.03 * aircraft.maxFuel)
-        typing(f"The maximum fuel is {aircraft.maxFuel}kg\n", 0.03)
-        typing(f"The minimum fuel is {minFuel}kg.\n", 0.03)
+        typing("Fuel quantity...\n", 0.02)
+        minFuel = round(0.02 * aircraft.maxFuel)
+        typing(f"The maximum fuel is {aircraft.maxFuel}kg\n", 0.02)
+        typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
         fuel = input("Please enter the total fuel in kg. "
                      "eg, 140000, 8000, 1200: \n")
 
@@ -106,7 +105,7 @@ def fuel_quantity(aircraft):
                 print("-------------FUEL TOO LOW-----------------")
                 print("-----PLEASE ENTER A VALID FUEL FIGURE-----\n")
             elif int(fuel) <= aircraft.maxFuel:
-                typing(f"{fuel}kg is valid and has been accepted.\n", 0.03)
+                typing(f"{fuel}kg is valid and has been accepted.\n", 0.02)
                 aircraft.fuel = fuel
                 return fuel
             else:
@@ -140,13 +139,12 @@ def passenger_quantity(aircraft):
     """
     while True:
         print()
-        typing("Passenger quantity...\n", 0.03)
-        time.sleep(0.5)
-        typing(f"Maximum number of passengers is {aircraft.maxPax}.\n", 0.03)
+        typing("Passenger quantity...\n", 0.02)
+        typing(f"Maximum number of passengers is {aircraft.maxPax}.\n", 0.02)
         typing("Passenger weights are 86kg for "
-               "adults and 35kg for children\n", 0.03)
+               "adults and 35kg for children\n", 0.02)
         typing("Each passenger is assumed to "
-               "have 15kg of hand luggage.\n", 0.03)
+               "have 15kg of hand luggage.\n", 0.02)
         adult_pax = input("Please enter the number of ADULT passengers: \n")
         child_pax = input("Please enter the number of CHILD passengers: \n")
         pax = ''
@@ -168,7 +166,7 @@ def passenger_quantity(aircraft):
                 print(f"Max for the {aircraft.model} is "
                       f"{aircraft.maxPax} passengers.")
             else:
-                typing(f"{pax} is valid and has been accepted.\n", 0.03)
+                typing(f"{pax} is valid and has been accepted.\n", 0.02)
                 print(f"The passenger weight "
                       f"is {traffic_load}kg")
                 return pax, traffic_load, adult_pax, child_pax
@@ -194,18 +192,18 @@ def cargo_quantity(aircraft, underload):
     cargo_load = 0
     if '-' in str(underload):
         print()
-        typing("Cargo quantity...\n", 0.03)
-        typing("Cargo is loaded if you have any underload.\n", 0.03)
+        typing("Cargo quantity...\n", 0.02)
+        typing("Cargo is loaded if you have any underload.\n", 0.02)
         typing(f"Your underload is {underload}kg"
-               f" (minus means 'too heavy by')\n", 0.03)
+               f" (minus means 'too heavy by')\n", 0.02)
         print()
         print('----Your aircraft is too heavy for cargo today----')
         return cargo_load
     while True:
         print()
-        typing("Cargo quantity...\n", 0.03)
-        typing("Cargo is loaded if you have any spare underload.\n", 0.03)
-        typing(f"Your underload is {underload}kg.\n", 0.03)
+        typing("Cargo quantity...\n", 0.02)
+        typing("Cargo is loaded if you have any spare underload.\n", 0.02)
+        typing(f"Your underload is {underload}kg.\n", 0.02)
         cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
 
         try:
@@ -217,7 +215,7 @@ def cargo_quantity(aircraft, underload):
                 print("-----CARGO QUANTITY TOO HIGH------")
                 print(f"Max cargo is {underload}kg.")
             else:
-                typing(f"{cargo_load} is valid and has been accepted.\n", 0.03)
+                typing(f"{cargo_load} is valid and has been accepted.\n", 0.02)
                 aircraft.cargo = cargo_load
                 return cargo_load
         except ValueError:
@@ -239,10 +237,10 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
         if tow > aircraft.mtow:
             print()
             typing(f"The take off weight is {tow}kg, "
-                   f"maximum is {aircraft.mtow}kg\n", 0.03
+                   f"maximum is {aircraft.mtow}kg\n", 0.02
                    )
             print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
-            typing("Please remove cargo, passengers or fuel:\n", 0.03)
+            typing("Please remove cargo, passengers or fuel:\n", 0.02)
             print("a) Cargo")
             print("b) Passengers")
             print("c) Fuel\n")
@@ -302,7 +300,7 @@ def another_flight():
     Function gives the user to start the application again for another flight.
     If yes, clear function called to clear the console before the next flight.
     """
-    next_flight = input("Do you wish to load another flight? Y or N")
+    next_flight = input("Do you wish to load another flight? Y or N\n")
 
     if next_flight.lower() == 'y':
         clear()
@@ -310,7 +308,7 @@ def another_flight():
         main()
     else:
         typing('Your flight has departed.'
-               'Thank you for using Loadsheet Planner.', 0.03)
+               'Thank you for using Loadsheet Planner.', 0.02)
         time.sleep(1)
 
 

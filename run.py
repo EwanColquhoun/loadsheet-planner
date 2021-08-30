@@ -1,4 +1,7 @@
 from functions import typing
+import datetime
+
+now = datetime.datetime.now()
 
 
 def opening_text():
@@ -37,7 +40,7 @@ class Aircraft:
     mtow = Maximum allowed take-off weight.
     """
     def __init__(self, model, maxPax, pax, traffic_load, maxFuel,
-                 fuel, cargo, eWeight, mtow):
+                 fuel, cargo, eWeight, tow, mtow):
         self.model = model
         self.maxPax = int(maxPax)
         self.pax = int(pax)
@@ -46,6 +49,7 @@ class Aircraft:
         self.fuel = int(fuel)
         self.cargo = int(cargo)
         self.eWeight = int(eWeight)
+        self.tow = int(tow)
         self.mtow = int(mtow)
 
 
@@ -167,7 +171,7 @@ def passenger_quantity(aircraft):
                 print(f"The passenger weight "
                       f"is {traffic_load}kg")
                 print()
-                return pax, traffic_load
+                return pax, traffic_load, adult_pax, child_pax
         except ValueError:
             print()
             print("Please enter passenger figure as a whole number only.")
@@ -247,9 +251,9 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
                 new_cargo = cargo_quantity(aircraft, underload)
                 aircraft.cargo = new_cargo
             elif choice.lower() == 'b':
-                new_pax, new_traffic_load = passenger_quantity(aircraft)
-                aircraft.pax = new_pax
-                aircraft.traffic_load = new_traffic_load
+                n_pax, n_traffic_load, ap, cp = passenger_quantity(aircraft)
+                aircraft.pax = n_pax
+                aircraft.traffic_load = n_traffic_load
             elif choice.lower() == 'c':
                 new_fuel = fuel_quantity(aircraft)
                 aircraft.fuel = new_fuel
@@ -259,6 +263,39 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
             return tow
 
 
+def print_loadsheet(aircraft, adults, children):
+    """
+    Function called once all inputs and data are compiled and validated.
+    Prints results.
+    """
+    zfw = (int(aircraft.eWeight)
+           + int(aircraft.traffic_load)
+           + int(aircraft.cargo))
+
+    typing('Printing loadsheet.................\n', 0.08)
+    print()
+    print('*' * 80)
+    print('-' * 80)
+    print(f'Loadsheet generated for {aircraft.model}'
+          f' on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}')
+    print('-' * 80)
+    print(f'Passengers:{adults} Adults\n'
+          f'           {children} Children\n')
+    print(f'Basic Weight:  {aircraft.eWeight}kg')
+    print(f'Fuel in tanks: {aircraft.fuel}kg')
+    print(f'Traffic Load:  {aircraft.traffic_load}kg')
+    print(f'Cargo:         {aircraft.cargo}kg')
+    print(f'Underload:     {int(aircraft.mtow) - int(aircraft.tow)}kg')
+    print('-' * 80)
+    print(f'ZFW:           {zfw}kg')
+    print('-' * 80)
+    print(f"TOW:           {aircraft.tow}kg")
+    print('-' * 80)
+    print(f"Maximum is     {aircraft.mtow}kg")
+    print('-' * 80)
+    print('*' * 80)
+
+
 def main():
     """
     Runs the application on loading the browser.
@@ -266,29 +303,20 @@ def main():
     opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
-    pax, traffic_load = passenger_quantity(aircraft)
+    pax, traffic_load, adults, children = passenger_quantity(aircraft)
     load_passengers(aircraft, pax, traffic_load)
     underload = calculate_underload(aircraft, fuel, traffic_load)
     cargo = cargo_quantity(aircraft, underload)
     new_tow = check_max_weight(aircraft, traffic_load, cargo, fuel, underload)
-    print()
-    print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
-    print(f"{aircraft.model}")
-    print(f'Basic Weight: {aircraft.eWeight}kg')
-    print(f'Fuel in tanks: {aircraft.fuel}kg')
-    print(f"Passengers: {aircraft.pax}.")
-    print(f'Traffic Load: {aircraft.traffic_load}kg')
-    print(f'Cargo: {aircraft.cargo}kg')
-    print(f'Underload: {int(aircraft.mtow) - int(new_tow)}kg')
-    print(f"TOW: {new_tow}kg")
-    print(f"Maximum is {aircraft.mtow}kg")
+    aircraft.tow = new_tow
+    print_loadsheet(aircraft, adults, children)
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000',
-                 '0', '0', '183500', '396000')
+                 '0', '0', '183500', '183500', '396000')
 ejet = Aircraft('Embraer 190', '98', '0', '0', '12900', '0',
-                '0', '28000', '45990')
+                '0', '28000', '28000', '45990')
 jetstream = Aircraft('Jetstream 41', '29', '0', '0', '2700',
-                     '0', '0', '6400', '10800')
+                     '0', '0', '6400', '6400', '10800')
 
 main()

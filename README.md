@@ -84,6 +84,10 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 
 [Back to top](<#contents>)
 # Technologies Used
+* Python
+* GitHub
+* Lucid Charts
+
 
 [Back to top](<#contents>)
 # Testing
@@ -93,6 +97,8 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 
 [Back to top](<#contents>)
 # Credits
+
+
 
 [Back to top](<#contents>)
 # Acknowledgements

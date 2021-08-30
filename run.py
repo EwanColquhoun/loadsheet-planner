@@ -74,22 +74,22 @@ def select_aircraft():
             print(f"-----You selected {ac_type}------")
             print("------That wasn't a valid aircraft------")
             print("Please select your aircraft from the options a, b or c.\n")
-
     return
 
 
-def fuel_quantity(type):
+def fuel_quantity(aircraft):
     """
     Defines the maximum and minimum fuel quantities depending on which
     aircraft was selected by the user.
     Displays the maximum and minimum fuel values for the user. Once fuel is
     inputted the value is checked to ensure it is in the correct range.
+    It is then loaded onto the aircraft object instance.
     An error is thrown if the value isn't a whole number.
     """
     while True:
         typing("Fuel quantity...\n", 0.02)
-        minFuel = round(0.05 * type.maxFuel)
-        typing(f"The maximum fuel is {type.maxFuel}kg\n", 0.02)
+        minFuel = round(0.05 * aircraft.maxFuel)
+        typing(f"The maximum fuel is {aircraft.maxFuel}kg\n", 0.02)
         typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
         fuel = input("Please enter the total fuel in kg. "
                      "eg, 140000, 8000, 1200: \n")
@@ -99,8 +99,9 @@ def fuel_quantity(type):
                 print()
                 print("-------------FUEL TOO LOW-----------------")
                 print("-----PLEASE ENTER A VALID FUEL FIGURE-----\n")
-            elif int(fuel) <= type.maxFuel:
+            elif int(fuel) <= aircraft.maxFuel:
                 typing(f"{fuel}kg is valid and has been accepted.\n", 0.02)
+                aircraft.fuel = fuel
                 return fuel
             else:
                 print()
@@ -109,23 +110,7 @@ def fuel_quantity(type):
         except ValueError:
             print()
             print("-----PLEASE ENTER FUEL AS A WHOLE NUMBER-----\n")
-            print(f"Maximum {type.maxFuel}kg. Minimum {minFuel}kg.\n")
-
-
-def load_fuel(fuel, type):
-    """
-    Uses the fuel figure from the fuel_quantity function to update the
-    Aircraft.fuel of the aircraft in use.
-    """
-    if type == jumbo:
-        jumbo.fuel = fuel
-        return
-    elif type == ejet:
-        ejet.fuel = fuel
-        return
-    elif type == jetstream:
-        jetstream.fuel = fuel
-        return
+            print(f"Maximum {aircraft.maxFuel}kg. Minimum {minFuel}kg.\n")
 
 
 def calculate_underload(aircraft, fuel, traffic_load):
@@ -188,28 +173,19 @@ def passenger_quantity(aircraft):
             print("Please enter passenger figure as a whole number only.")
 
 
-def load_passengers(type, pax, traffic_load):
+def load_passengers(aircraft, pax, traffic_load):
     """
-    Calculates the passenger weight then adds
+     Calculates the passenger weight then adds
     the number of passengers to the instance of Aircraft.
     """
-    if type == jumbo:
-        jumbo.pax = pax
-        jumbo.traffic_load = traffic_load
-        return
-    elif type == ejet:
-        ejet.pax = pax
-        ejet.traffic_load = traffic_load
-        return
-    elif type == jetstream:
-        jetstream.pax = pax
-        jetstream.traffic_load = traffic_load
-        return
+    aircraft.pax = pax
+    aircraft.traffic_load = traffic_load
 
 
-def cargo_quantity(underload):
+def cargo_quantity(aircraft, underload):
     """
-    Inputs the amount of cargo for the flight in kg. Validates the input.
+    Inputs the amount of cargo for the flight in kg. Validates the input
+    then loads it onto the aircraft class instance.
     """
     cargo_load = 0
     if '-' in str(underload):
@@ -229,7 +205,7 @@ def cargo_quantity(underload):
         cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
 
         try:
-            if cargo_load == '':
+            if cargo_load == '' or int(cargo_load) < 0:
                 print()
                 print("-----PLEASE ENTER 0 IF NO CARGO-----")
             elif int(cargo_load) > int(underload):
@@ -238,18 +214,11 @@ def cargo_quantity(underload):
                 print(f"Max cargo is {underload}kg.")
             else:
                 typing(f"{cargo_load} is valid and has been accepted.\n", 0.02)
+                aircraft.cargo = cargo_load
                 return cargo_load
         except ValueError:
             print()
             print("Please enter cargo figure as a whole number only.")
-
-
-def load_cargo(type, cargo):
-    """
-    Loads the cargo onto the Aircraft class.
-    """
-    type.cargo = cargo
-    print(f'the {type.model} has {type.cargo}kg of cargo')
 
 
 def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
@@ -275,7 +244,7 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
             choice = input("Please select a, b or c: \n")
 
             if choice.lower() == 'a':
-                new_cargo = cargo_quantity(underload)
+                new_cargo = cargo_quantity(aircraft, underload)
                 aircraft.cargo = new_cargo
             elif choice.lower() == 'b':
                 new_pax, new_traffic_load = passenger_quantity(aircraft)
@@ -294,17 +263,15 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()
+    # opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
-    load_fuel(fuel, aircraft)
     pax, traffic_load = passenger_quantity(aircraft)
     load_passengers(aircraft, pax, traffic_load)
     underload = calculate_underload(aircraft, fuel, traffic_load)
-    cargo = cargo_quantity(underload)
+    cargo = cargo_quantity(aircraft, underload)
     new_tow = check_max_weight(aircraft, traffic_load, cargo, fuel, underload)
-    load_cargo(aircraft, cargo)
-
+    print()
     print("BELOW IS FOR TEST ONLY and will be removed on final deployment")
     print(f"{aircraft.model}")
     print(f'Basic Weight: {aircraft.eWeight}kg')
@@ -324,5 +291,4 @@ ejet = Aircraft('Embraer 190', '98', '0', '0', '12900', '0',
 jetstream = Aircraft('Jetstream 41', '29', '0', '0', '2700',
                      '0', '0', '6400', '10800')
 
-fleet = (jumbo, ejet, jetstream)
 main()

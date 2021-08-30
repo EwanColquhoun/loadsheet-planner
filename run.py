@@ -6,7 +6,7 @@ def opening_text():
     Displays the opening text. Displays what aircraft are available to select.
     """
     typing("        Welcome to the Loadsheet Planner\n", 0.02)
-    typing("   ....Retrieving the database of Aircraft....\n", 0.02)
+    typing("Retrieving the Aircraft database....\n", 0.02)
     print()
     typing('                         |                         \n', 0.005)
     typing('                         |                         \n', 0.005)

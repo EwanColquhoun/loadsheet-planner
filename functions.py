@@ -1,6 +1,7 @@
 # import time and sys module for typing effect function.
 import sys
 import time
+from os import system, name
 
 
 # Code Credit - Help with the typing() function was found here:
@@ -19,3 +20,15 @@ def typing(text, speed):
         sys.stdout.flush()
         time.sleep(speed)
 # End Code Credit
+
+
+# https://www.geeksforgeeks.org/clear-screen-python/
+def clear():
+    """
+    When called it clears the interactive console.
+    """
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+    else:  # for mac and linux(here, os.name is 'posix')
+        _ = system('clear')

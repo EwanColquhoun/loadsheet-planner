@@ -49,6 +49,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * Jetstream 41 [![J41 image](assets/images/j41.jpg)](https://en.wikipedia.org/wiki/British_Aerospace_Jetstream_41)
 
 * Terminology - 
+    * [**Loadsheet**](https://www.linkedin.com/pulse/aircraft-loadsheet-peter-irungu/) - Provides the crew with the various weights that are crutial for te flight. Compiled for information from the airline (passenger and cargo figures) and the crew themselves (fuel, aircraft specific weights).
     * [**Aircraft Dispatcher**](https://www.myworldofwork.co.uk/my-career-options/job-profiles/flight-dispatcher) - Provides the Pilots with the weight and balance information relevant to the flight. Also is the liason between the Pilots and the loading staff for both bags and passengers.
     * **Flight crew** - In this case Pilots, could include loadmaster and navigatior in other cases.
     * **Basic Weight** (eWeight in this app) - The weight of the aircraft without passengers, baggage or usable fuel.

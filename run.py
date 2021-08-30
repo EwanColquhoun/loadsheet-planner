@@ -1,8 +1,68 @@
 from functions import typing, clear
 import datetime
 import time
+from fpdf import FPDF
+import webbrowser
+
 
 now = datetime.datetime.now()
+
+text_speed_fast = 0.0000
+text_speed_slow = 0.0000
+
+
+def output_pdf(aircraft, adults, children): 
+    zfw = (int(aircraft.eWeight) + int(aircraft.traffic_load) + int(aircraft.cargo))
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_xy(0, 30)
+    pdf.set_font('arial', 'B', 14)
+    pdf.cell(60)
+    pdf.cell(75, 30, f'LOADSHEET for {aircraft.model} on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}', 0, 2, 'C')
+    pdf.cell(-40)
+    #pdf.cell(90, 10, f'Passengers: {adults} Adult, {children} Children', 0, 2, 'L')
+    # Passengers
+    pdf.cell(60, 10, 'Passengers:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{adults} Adult, {children} Children', 0, 2, 'L')
+    pdf.cell(-60)
+    # Basic Weight
+    pdf.cell(60, 10, 'Basic Weight:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.eWeight}kg', 0, 2, 'L')
+    pdf.cell(-60)
+    # Fuel
+    pdf.cell(60, 10, 'Fuel in Tanks:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.fuel}kg', 0, 0, 'L')
+    pdf.cell(40, 10, f'MAX: {aircraft.maxFuel}', 0, 2, 'L')
+    pdf.cell(-100)
+    # Traffic Load
+    pdf.cell(60, 10, 'Traffic Load: ', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.traffic_load}kg', 0, 0, 'L')
+    pdf.cell(40, 10, f'MAX: {aircraft.maxPax}kg', 0, 2, 'L')
+    pdf.cell(-100)
+    # Cargo
+    pdf.cell(60, 10, 'Cargo:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.cargo}kg', 0, 0, 'L')
+    pdf.cell(40, 10, f'MAX: {int(aircraft.mtow) - int(aircraft.tow)}kg', 0, 2, 'L')
+    pdf.cell(-100)
+    # Underload
+    pdf.cell(60, 10, 'Underload:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{int(aircraft.mtow) - int(aircraft.tow)}kg', 0, 2, 'L')
+    pdf.cell(-60)
+    # ZFW
+    pdf.cell(60, 10, 'ZFW (zero fuel weight):', 0, 0, 'L')
+    pdf.cell(40, 10, f'{zfw}kg', 0, 2, 'L')
+    pdf.cell(-60)
+    # TOW
+    pdf.cell(60, 10, 'TOW (take-off weight):', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.tow}kg', 0, 2, 'L')
+    pdf.cell(-60)
+    # Max
+    pdf.cell(60, 10, 'Maximum is:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.mtow}kg', 0, 2, 'L')
+    pdf.cell(-60)
+
+    pdf.set_font('arial', '', 12)
+    pdf.output('loadsheet.pdf', 'F')
 
 
 def opening_text():
@@ -100,7 +160,7 @@ def fuel_quantity(aircraft):
                      "eg, 140000, 8000, 1200: \n")
 
         try:
-            if int(fuel) <= minFuel:
+            if int(fuel) < minFuel:
                 print()
                 print("-------------FUEL TOO LOW-----------------")
                 print("-----PLEASE ENTER A VALID FUEL FIGURE-----\n")
@@ -279,7 +339,7 @@ def print_loadsheet(aircraft, adults, children):
           f' on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}')
     print('-' * 78)
     print(f'Passengers:{adults} Adults\n'
-          f'         {children} Children\n')
+          f'           {children} Children\n')
     print(f'Basic Weight:  {aircraft.eWeight}kg')
     print(f'Fuel in tanks: {aircraft.fuel}kg')
     print(f'Traffic Load:  {aircraft.traffic_load}kg')
@@ -306,10 +366,11 @@ def another_flight():
         clear()
         time.sleep(0.5)
         main()
-    else:
+    elif next_flight.lower() == 'n':
         typing('Your flight has departed.'
                'Thank you for using Loadsheet Planner.', 0.02)
         time.sleep(1)
+        clear()
 
 
 def main():
@@ -326,6 +387,10 @@ def main():
     new_tow = check_max_weight(aircraft, traffic_load, cargo, fuel, underload)
     aircraft.tow = new_tow
     print_loadsheet(aircraft, adults, children)
+    output_pdf(aircraft, adults, children)
+    new = 2
+    url = "https://loadsheet-planner.herokuapp.com/"
+    webbrowser.open(url, new=new)
     another_flight()
 
 

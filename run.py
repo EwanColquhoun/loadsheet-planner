@@ -11,8 +11,10 @@ text_speed_fast = 0.0000
 text_speed_slow = 0.0000
 
 
-def output_pdf(aircraft, adults, children): 
-    zfw = (int(aircraft.eWeight) + int(aircraft.traffic_load) + int(aircraft.cargo))
+def output_pdf(aircraft, adults, children):
+    zfw = (int(aircraft.eWeight)
+           + int(aircraft.traffic_load)
+           + int(aircraft.cargo))
     pdf = FPDF()
     pdf.add_page()
     pdf.set_xy(0, 30)
@@ -20,7 +22,6 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(60)
     pdf.cell(75, 30, f'LOADSHEET for {aircraft.model} on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}', 0, 2, 'C')
     pdf.cell(-40)
-    #pdf.cell(90, 10, f'Passengers: {adults} Adult, {children} Children', 0, 2, 'L')
     # Passengers
     pdf.cell(60, 10, 'Passengers:', 0, 0, 'L')
     pdf.cell(40, 10, f'{adults} Adult, {children} Children', 0, 2, 'L')
@@ -389,7 +390,7 @@ def main():
     print_loadsheet(aircraft, adults, children)
     output_pdf(aircraft, adults, children)
     new = 2
-    url = "https://loadsheet-planner.herokuapp.com/"
+    url = "https://github.com/EwanColquhoun/loadsheet-planner/blob/main/loadsheet.pdf"
     webbrowser.open(url, new=new)
     another_flight()
 

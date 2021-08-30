@@ -263,7 +263,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    # opening_text()
+    opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     pax, traffic_load = passenger_quantity(aircraft)

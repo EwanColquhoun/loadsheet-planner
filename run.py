@@ -1,7 +1,6 @@
 from functions import typing, clear
 import datetime
 import time
-import sys
 
 now = datetime.datetime.now()
 
@@ -129,8 +128,6 @@ def calculate_underload(aircraft, fuel, traffic_load):
                  - int(aircraft.eWeight)
                  - int(aircraft.fuel)
                  - int(traffic_load))
-
-    # typing(f"The underload before cargo is {underload}kg\n", 0.03)
     return underload
 
 
@@ -278,13 +275,13 @@ def print_loadsheet(aircraft, adults, children):
 
     typing('Printing loadsheet.................\n', 0.08)
     print()
-    print('*' * 78)
+    print('-' * 78)
     print('-' * 78)
     print(f'Loadsheet generated for {aircraft.model}'
           f' on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}')
     print('-' * 78)
     print(f'Passengers:{adults} Adults\n'
-          f'           {children} Children\n')
+          f'         {children} Children\n')
     print(f'Basic Weight:  {aircraft.eWeight}kg')
     print(f'Fuel in tanks: {aircraft.fuel}kg')
     print(f'Traffic Load:  {aircraft.traffic_load}kg')
@@ -297,7 +294,7 @@ def print_loadsheet(aircraft, adults, children):
     print('-' * 78)
     print(f"Maximum is     {aircraft.mtow}kg")
     print('-' * 78)
-    print('*' * 78)
+    print('-' * 78)
 
 
 def another_flight():
@@ -315,6 +312,7 @@ def another_flight():
         typing('Your flight has departed.'
                'Thank you for using Loadsheet Planner.', 0.03)
         time.sleep(1)
+
 
 def main():
     """

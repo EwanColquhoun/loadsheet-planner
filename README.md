@@ -5,7 +5,7 @@ It is designed to take a number of inputs from the user to narrow down the accep
 
 To try your hand planning a loadsheet please click [**here**](https://loadsheet-planner.herokuapp.com/).
 
-![Image of the deployed application](assets/images/deployed_app.png)
+![Image of the deployed application](assets/videos/app_load.gif)
 
 # Contents
 
@@ -53,27 +53,28 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * **Flight crew** - In this case Pilots, could include loadmaster and navigatior in other cases.
     * **Basic Weight** (eWeight in this app) - The weight of the aircraft without passengers, baggage or usable fuel.
     * **Traffic load** - For this app it is the mass of the passengers and bags. Often      cargo mass is also included in this definition.
+    * **Zero Fuel weight (ZFW)** - The weight of the loaded aircraft without the fuel.
     * **Take off weight (TOW)** - The weight of the aircraft at take off. It is comprised off the Basic weight, traffic load and fuel. 
     * **Maximum take off weight (MTOW)** - The maximum weight the pilot is permitted to attempt to take off. Can be reduced for performance requirements (not functional in this app version).
     * **Underload** - The difference between the MTOW and the TOW.
 
-
+[Back to top](<#contents>)
 ## Instructions
 
-1. Select the aircraft you are going to load.
+1. Select a, b or c to choose the aircraft you are going to load.
 2. Input the fuel figure (in kg) that has been passed to you by the Flight crew.
 3. Input the passenger numbers (adult/children) that has been passed to you by the Airline.
-4. Check to see if you have the weight capacity (underload).
+4. The Loadsheet Planner calculates the aircraft's underload.
 5. If you have an underload, you can input the amount of cargo you require.
-6. 
-
+6. The loadsheet prints automatically on completion of the above steps. Currently it prints to the app interface.
+7. The user is then given an option to load another flight or exit.
 
 [Back to top](<#contents>)
 # Data Model
 
 ## Code flow charts
 
-![Code flow charts images](/assets/images/loadsheet.png)
+![Code flow charts images](/assets/images/LSFlow.png)
 
 [Back to top](<#contents>)
 # Features

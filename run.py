@@ -60,7 +60,7 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(-60)
 
     pdf.set_font('arial', '', 12)
-    pdf.output('loadsheet.pdf', 'F')
+    pdf.output('loadsheet.pdf', 'D')
 
 
 def opening_text():
@@ -359,13 +359,21 @@ def another_flight():
     If yes, clear function called to clear the console before the next flight.
     """
     next_flight = input("Do you wish to load another flight? Y or N\n")
-
+    
     if next_flight.lower() == 'y':
         main()
+        return
     elif next_flight.lower() == 'n':
         typing('Your flight has departed.'
-               'Thank you for using Loadsheet Planner.', 0.02)
+                'Thank you for using Loadsheet Planner.', 0.02)
         clear()
+        return
+    else:
+        print()
+        print('Please enter Y to load another flight or'
+                ' N to exit the application')
+        print()
+        another_flight()
 
 
 def main():

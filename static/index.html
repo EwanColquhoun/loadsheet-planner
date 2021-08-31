@@ -13,6 +13,7 @@
 <body>
     <button onclick="window.location.reload()">Run Program</button>
     <div id="terminal"></div>
+    <button onclick="print_loadsheet()">Print Loadsheet</button>
     <script>
         var socket = null;
         var term = null;
@@ -85,6 +86,10 @@
             }
 
             runFakeTerminal();
+        }
+
+        function print_loadsheet() {
+            window.location.assign("https://github.com/EwanColquhoun/loadsheet-planner/blob/main/loadsheet.pdf")
         }
 
         document.addEventListener("DOMContentLoaded", function () {

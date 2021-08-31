@@ -10,7 +10,7 @@ now = datetime.datetime.now()
 text_speed_fast = 0.0000
 text_speed_slow = 0.0000
 
-
+"""
 def output_pdf(aircraft, adults, children):
     zfw = (int(aircraft.eWeight)
            + int(aircraft.traffic_load)
@@ -64,7 +64,7 @@ def output_pdf(aircraft, adults, children):
 
     pdf.set_font('arial', '', 12)
     pdf.output('loadsheet.pdf', 'F')
-
+"""
 
 def opening_text():
     """
@@ -388,10 +388,10 @@ def main():
     new_tow = check_max_weight(aircraft, traffic_load, cargo, fuel, underload)
     aircraft.tow = new_tow
     print_loadsheet(aircraft, adults, children)
-    output_pdf(aircraft, adults, children)
-    new = 2
-    url = "/workspace/loadsheet-planner/loadsheet.pdf"
-    webbrowser.open(url, new=new)
+    # output_pdf(aircraft, adults, children)
+    # new = 2
+    # url = "/workspace/loadsheet-planner/loadsheet.pdf"
+    # webbrowser.open(url, new=new)
     another_flight()
 
 

@@ -1,4 +1,3 @@
-
 const PythonShell = require('python-shell')['PythonShell'];
 const static = require('node-static');
 const http = require('http');
@@ -13,12 +12,12 @@ const server = http.createServer(function (req, res) {
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
     console.log("Socket Connected");
-    
+
     function run_python_script() {
         try {
             let pyshell = new PythonShell('run.py');
 
-            socket.on('disconnect', () =>  {
+            socket.on('disconnect', () => {
                 console.log("Socket Disconnected");
                 try {
                     pyshell.kill();
@@ -27,7 +26,7 @@ io.on('connection', (socket) => {
                 }
             });
 
-            socket.on('command_entered', (command) =>  {
+            socket.on('command_entered', (command) => {
                 console.log("Socket Command: ", command);
                 try {
                     pyshell.send(command);
@@ -39,7 +38,7 @@ io.on('connection', (socket) => {
 
             // sends a message to the Python script via stdin
 
-            pyshell.on('message',  (message) => {
+            pyshell.on('message', (message) => {
                 // received a message sent from the Python script (a simple "print" statement)
                 console.log('process Out: ', message);
                 try {
@@ -67,7 +66,7 @@ io.on('connection', (socket) => {
     }
 
     if (process.env.CREDS != null) {
-        fs.writeFile('creds.json', process.env.CREDS, 'utf8', function(err) {
+        fs.writeFile('creds.json', process.env.CREDS, 'utf8', function (err) {
             if (err) {
                 console.log('Error writing file: ', err);
                 socket.emit("console_output", "Error saving credentials: " + err);

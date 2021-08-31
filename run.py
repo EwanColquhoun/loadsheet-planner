@@ -314,13 +314,10 @@ def another_flight():
         main()
         return
     elif next_flight.lower() == 'n':
-        print("""
-                            ////    
-                        |||| 
-        -------------:::''''
-        """)
+        time.sleep(1)
         print('Your flight has departed. '
               'Thank you for using Loadsheet Planner.\n')
+        time.sleep(2)
         clear_terminal()
         print('-' * 78)
         print('\nPlease click on the "Run Loadsheet Planner"'

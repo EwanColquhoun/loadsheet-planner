@@ -252,6 +252,8 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
                 n_pax, n_traffic_load, ap, cp = passenger_quantity(aircraft)
                 aircraft.pax = n_pax
                 aircraft.traffic_load = n_traffic_load
+                ap == 0
+                cp == 0
             elif choice.lower() == 'c':
                 new_fuel = fuel_quantity(aircraft)
                 aircraft.fuel = new_fuel

@@ -54,6 +54,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * **Flight crew** - In this case Pilots, could include loadmaster and navigatior in other cases.
     * **Basic Weight** (eWeight in this app) - The weight of the aircraft without passengers, baggage or usable fuel.
     * **Traffic load** - For this app it is the mass of the passengers and bags. Often      cargo mass is also included in this definition.
+    * **Cargo** - For this app it is the mass of cargo (could be baggage, animals, cars, ppe etc) that is in the aircraft hold (under the passengers).
     * **Zero Fuel weight (ZFW)** - The weight of the loaded aircraft without the fuel.
     * **Take off weight (TOW)** - The weight of the aircraft at take off. It is comprised off the Basic weight, traffic load and fuel. 
     * **Maximum take off weight (MTOW)** - The maximum weight the pilot is permitted to attempt to take off. Can be reduced for performance requirements (not functional in this app version).
@@ -130,7 +131,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 
 [Back to top](<#contents>)
 ## Future Features
-* The loadsheet displaying on the browser screen. Within the confines of the CI template this feature isn't possible. For this release the loadsheet is stored as a pdf in the workspace after it is printed to the screen. [Loadsheet](loadsheet.pdf)
+* The loadsheet displaying on the browser screen. Within the confines of the CI template this feature isn't easily possible. For this release the loadsheet is stored as a pdf in the workspace after it is printed to the screen. eg; [Loadsheet](loadsheet.pdf).
 
 [Back to top](<#contents>)
 # Technologies Used
@@ -143,6 +144,16 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 
 [Back to top](<#contents>)
 # Testing
+Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html).
+![PEP8 results image](assets/images/pep8.png)
+# Bugs
+## Resolved bugs
+* In the check_max_weight function, there is a call for the passenger_quantity function. The passenger_quantity function returns a tuple of 4 values. When called within the parent function the last two values of the tuple aren't used. This was throwing an 'unused variable' error. To get around this both variables were assigned the value of 0.
+
+![Resolved image](assets/images/resolved.png)
+
+## Unresolved bugs
+* There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
 
 [Back to top](<#contents>)
 # Deployment
@@ -157,8 +168,9 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 5. Click "New" and select "create new app" from the drop-down menu. This is found in the upper right portion of the window. 
 6. Provide a name for your application, this needs to be unique, and select your region.
 7. Click "Create App".
+![New app image](assets/images/new-app.png)
 
-### Setting up Heroku
+### Setting up the App within Heroku
 
 1. Navigate to "Settings" and scroll down to "build packs".
 2. Click "build packs" and then click both "python" and "node.js"(node.js is needed for the Code Institute mock terminal.)
@@ -174,7 +186,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 5. For Deployment there are two options, Automatic Deployments or Manual.
     - Automatic Deployment: This will prompt Heroku to re-build your app each time you push your code to GitHub.
     - Manual Deployment: This will only prompt Heroku to build your app when you manually tell it to do so. 
-6. Ensure the correct branch is selected "master/Main", and select the deployment method that you desire. In this case, I will be using Automatic Deployment.
+6. Ensure the correct branch is selected "master/Main", and select the deployment method that you desire.
 ![Heroku deployment](assets/images/deploy.png)
 
 ### **To fork the repository on GitHub**
@@ -196,9 +208,20 @@ The method from cloning a project from GitHub is below:
 
 [Back to top](<#contents>)
 # Credits
-* Non-original code is credited in the [functions.py](functions.py) file. 
+* The Github python project template from The Code Institute forms the framework of this project.
+* Non-original code is credited as comments in the [functions.py](functions.py) file.
+* Images for the Readme-Definitions-Aircraft section came from [Google Images](https://www.google.com/imghp?hl=en).
+
+# Caveats
+The Loadsheet Planner application is based on a real world process. However this project is not suitable for real world use within the aviation industry. To enable it to be used for actual flight dispatch a number of items would need altered. It would need to take the specifics of each aircraft an airline has, each individual aircraft also weighs slightly differently depending on a number of factors. <br>
+At the planning stage the other fuel figure that is needed is that 'taxi fuel'. This is the fuel use between engine start up and take off. Whilst not important for the functionallity of this application, in a real world context it could mean that an aircraft was heavier than the perfomance figures would allow had it not been entered. <br>
+Another feature that would need altering slightly is the passenger and baggage weights. There are [standard passenger weights](https://www.legislation.gov.uk/uksi/2006/601/body/made?view=plain) that can be used depending on the flight type and duration. This would be known by the user in advance so could be amended before application use if required.
+
 [Back to top](<#contents>)
 # Acknowledgements
+
+The Loadsheet Planner application was created as Portfolio Project 3 for the Full Stack Software Developer diploma by the [Code Institute](https://codeinstitute.net/). It was enjoyable to create something that with a little development could be used within the aviation industry and have a tangable purpose. <br><br>
+I would like to thank my mentor, [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community and all at the Code Institute who have helped me along the way. 
 
 [Back to top](<#contents>)
 

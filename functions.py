@@ -48,8 +48,8 @@ def output_pdf(aircraft, adults, children):
     pdf.set_font('arial', 'B', 14)
     pdf.cell(60)
     pdf.cell(75, 30, f'LOADSHEET for {aircraft.model} on '
-                     f'{now.strftime("%Y-%m-%d")} at '
-                     f'{now.strftime("%H:%M:%S")}', 0, 2, 'C')
+             f'{now.strftime("%Y-%m-%d")} at '
+             f'{now.strftime("%H:%M:%S")}', 0, 2, 'C')
     pdf.cell(-40)
     # Passengers
     pdf.cell(60, 10, 'Passengers:', 0, 0, 'L')
@@ -72,7 +72,7 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(60, 10, 'Cargo:', 0, 0, 'L')
     pdf.cell(40, 10, f'{aircraft.cargo}kg', 0, 0, 'L')
     pdf.cell(40, 10, f'MAX: {int(aircraft.mtow) - int(aircraft.tow)}'
-                     f'kg', 0, 2, 'L')
+             f'kg', 0, 2, 'L')
     pdf.cell(-100)
     # Underload
     pdf.cell(60, 10, 'Underload:', 0, 0, 'L')

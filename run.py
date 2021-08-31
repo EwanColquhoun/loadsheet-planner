@@ -1,5 +1,6 @@
 from functions import typing, clear_terminal, output_pdf
 import datetime
+import time
 
 now = datetime.datetime.now()
 
@@ -273,6 +274,11 @@ def print_loadsheet(aircraft, adults, children):
            + int(aircraft.cargo))
 
     typing('Printing loadsheet.................\n', 0.01)
+    time.sleep(1)
+    print('.' * 40)
+    time.sleep(1)
+    print('.' * 40)
+    time.sleep(1)
     print()
     print('-' * 78)
     print('-' * 78)
@@ -291,7 +297,7 @@ def print_loadsheet(aircraft, adults, children):
     print('-' * 78)
     print(f"TOW:           {aircraft.tow}kg")
     print('-' * 78)
-    print(f"Maximum is     {aircraft.mtow}kg")
+    print(f"MTOW           {aircraft.mtow}kg")
     print('-' * 78)
     print('-' * 78)
 
@@ -308,11 +314,18 @@ def another_flight():
         main()
         return
     elif next_flight.lower() == 'n':
-        print('Your flight has departed.'
+        print("""
+                            ////    
+                        |||| 
+        -------------:::''''
+        """)
+        print('Your flight has departed. '
               'Thank you for using Loadsheet Planner.\n')
         clear_terminal()
+        print('-' * 78)
         print('\nPlease click on the "Run Loadsheet Planner"'
               'button to begin\n')
+        print('-' * 78)
         return
     else:
         print()

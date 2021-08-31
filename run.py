@@ -10,6 +10,7 @@ def opening_text():
     Displays the opening text. Displays what aircraft are available to select.
     """
     typing("        Welcome to the Loadsheet Planner\n", 0.02)
+    print()
     typing("Retrieving the Aircraft database....\n", 0.02)
     print()
     typing('                         |                         \n', 0.005)
@@ -320,7 +321,7 @@ def another_flight():
         time.sleep(2)
         clear_terminal()
         print('-' * 78)
-        print('\nPlease click on the "Run Loadsheet Planner"'
+        print('\nPlease click on the "Run Loadsheet Planner" '
               'button to begin\n')
         print('-' * 78)
         return

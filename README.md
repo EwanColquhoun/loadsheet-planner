@@ -1,4 +1,4 @@
-# Loadsheet Planner (WORK-IN-PROGRESS)
+# Loadsheet Planner
 
 The Loadsheet planner application is designed for use by an airline dispatcher to quickly calculate the acceptable loads whilst preparing an aircraft for dispatch. <br>
 It is designed to take a number of inputs from the user to narrow down the acceptable fuel, passenger and cargo loads available to them. In this scenario the fuel, passenger and cargo loads would have already been passed from the company and Flight Crew.
@@ -23,6 +23,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 * [**Testing**](<#testing>)
 * [**Deployment**](<#deployment>)
 * [**Credits**](<#credits>)
+* [**Caveats**](<#caveats>)
 *  [**Acknowledgements**](<#acknowledgements>)
 
 # User Experience

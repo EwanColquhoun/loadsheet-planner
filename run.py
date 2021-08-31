@@ -1,9 +1,6 @@
 from functions import typing, clear
 import datetime
-import time
 from fpdf import FPDF
-import js2py
-
 
 now = datetime.datetime.now()
 

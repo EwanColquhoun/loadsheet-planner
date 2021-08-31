@@ -1,7 +1,7 @@
 # import time and sys module for typing effect function.
 import sys
 import time
-from os import system, name
+import os
 import datetime
 from fpdf import FPDF
 
@@ -18,24 +18,20 @@ def typing(text, speed):
     provides a typing like animation.
     text = The text you wish to enter.
     speed = The typing animations speed.
+    Currently not 100% functional in the CI template.
     """
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(speed)
-# End Code Credit
 
 
-# https://www.geeksforgeeks.org/clear-screen-python/
-def clear():
+# code from http://www.coding4you.at/inf_tag/beginners_python_cheat_sheet.pdf
+def clear_terminal():
     """
-    When called it clears the interactive console.
+    Clearing the terminal.
     """
-    # for windows
-    if name == 'nt':
-        _ = system('cls')
-    else:  # for mac and linux(here, os.name is 'posix')
-        _ = system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 # http://www.fpdf.org/ used to output a PDF into the workspace.

@@ -81,8 +81,43 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 # Features
 
 ## Existing Features
+* Welcome page
+    * The page the Loadsheet Planner displays initially.
+    ![Welcome page image](assets/images/opening-text.png)
+* Fuel input
+    * Initial fuel input page
+    ![Fuel input image](assets/images/fuel-input.png)
+    * Too much fuel - Fuel input is above the maximum allowed.
+    ![High-fuel image](assets/images/high-fuel.png)
+    * Not enough fuel - Fuel input is below the minimum required.
+    ![Low fuel image](assets/images/low-fuel.png)
+    * Incorrect input character - Input is not a number.
+    ![Incorrect fuel input images](assets/images/nan-fuel.png)
 
+* Passenger input
+    * Initial passenger input.
+    ![Passenger input image](assets/images/pax-input.png)
+    * Too many passengers
+    ![Too many pax image](assets/images/high-pax.png)
+    * Incorrect input character
+    ![Pax error image](assets/images/pax-error.png)
+
+* No underload 
+    * This feature prevent the loading of cargo as the aircraft is already too heavy. It directs the user to remove either some passengers, fuel or previously loaded cargo.
+![Underload Image](assets/images/no-underload.png)
+
+* Cargo input
+    * Initial cargo input
+    ![Cargo input image](assets/images/cargo-input.png)
+    * Too much cargo
+    ![Too much cargo image](assets/images/high-cargo.png)
+    * Incorrect input character
+    ![Incorrect cargo](assets/images/cargo-error.png)
+* Print Loadsheet
+    * Prints the compiled loadsheet to the application interface and gives the user the option to load another flight or exit.
+    ![Printed loadsheet](assets/images/printing-loadsheet.png)
 ## Future Features
+* The loadsheet displaying on the browser screen. Within the confines of the CI template this feature isn't possible. For this release the loadsheet is stored as a pdf in the workspace after it is printed to the screen. [Loadsheet](loadsheet.pdf)
 
 [Back to top](<#contents>)
 # Technologies Used

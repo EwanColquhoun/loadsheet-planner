@@ -1,10 +1,5 @@
 from functions import typing, clear, output_pdf
 import datetime
-import os
-import webbrowser
-import subprocess
-
-loadsheet_file = '/workspace/loadsheet-planner/loadsheet.pdf'
 
 now = datetime.datetime.now()
 
@@ -305,19 +300,20 @@ def another_flight():
     If yes, clear function called to clear the console before the next flight.
     """
     next_flight = input("Do you wish to load another flight? Y or N\n")
-    
+
     if next_flight.lower() == 'y':
+        clear()
         main()
         return
-    elif next_flight.lower() == 'n':
+    if next_flight.lower() == 'n':
         typing('Your flight has departed.'
-                'Thank you for using Loadsheet Planner.', 0.02)
+               'Thank you for using Loadsheet Planner.', 0.02)
         clear()
         return
     else:
         print()
         print('Please enter Y to load another flight or'
-                ' N to exit the application')
+              ' N to exit the application')
         print()
         another_flight()
 
@@ -326,7 +322,6 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    webbrowser.open_new('https://www.aurora.nats.co.uk/htmlAIP/Publications/2021-10-07-AIRAC/html/index-en-GB.html')
     opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
@@ -338,7 +333,6 @@ def main():
     aircraft.tow = new_tow
     print_loadsheet(aircraft, adults, children)
     output_pdf(aircraft, adults, children)
-    webbrowser.open_new(loadsheet_file)
     another_flight()
 
 

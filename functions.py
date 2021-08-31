@@ -38,6 +38,7 @@ def clear():
         _ = system('clear')
 
 
+# http://www.fpdf.org/ used to output a PDF into the workspace.
 def output_pdf(aircraft, adults, children):
     """
     Uses FPDF to create a pdf of the loadsheet.
@@ -50,7 +51,9 @@ def output_pdf(aircraft, adults, children):
     pdf.set_xy(0, 30)
     pdf.set_font('arial', 'B', 14)
     pdf.cell(60)
-    pdf.cell(75, 30, f'LOADSHEET for {aircraft.model} on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}', 0, 2, 'C')
+    pdf.cell(75, 30, f'LOADSHEET for {aircraft.model} on '
+                     f'{now.strftime("%Y-%m-%d")} at '
+                     f'{now.strftime("%H:%M:%S")}', 0, 2, 'C')
     pdf.cell(-40)
     # Passengers
     pdf.cell(60, 10, 'Passengers:', 0, 0, 'L')
@@ -68,12 +71,12 @@ def output_pdf(aircraft, adults, children):
     # Traffic Load
     pdf.cell(60, 10, 'Traffic Load: ', 0, 0, 'L')
     pdf.cell(40, 10, f'{aircraft.traffic_load}kg', 0, 0, 'L')
-    pdf.cell(40, 10, f'MAX: {aircraft.maxPax}kg', 0, 2, 'L')
     pdf.cell(-100)
     # Cargo
     pdf.cell(60, 10, 'Cargo:', 0, 0, 'L')
     pdf.cell(40, 10, f'{aircraft.cargo}kg', 0, 0, 'L')
-    pdf.cell(40, 10, f'MAX: {int(aircraft.mtow) - int(aircraft.tow)}kg', 0, 2, 'L')
+    pdf.cell(40, 10, f'MAX: {int(aircraft.mtow) - int(aircraft.tow)}'
+                     f'kg', 0, 2, 'L')
     pdf.cell(-100)
     # Underload
     pdf.cell(60, 10, 'Underload:', 0, 0, 'L')

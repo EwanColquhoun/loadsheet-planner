@@ -2,6 +2,7 @@ from functions import typing, clear_terminal, output_pdf
 import datetime
 import time
 
+
 now = datetime.datetime.now()
 
 

@@ -84,12 +84,23 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(-60)
     # Underload
     pdf.cell(60, 10, 'Underload:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{int(aircraft.mtow) - int(aircraft.tow)}kg', 'B', 2, 'L')
+    pdf.cell(40, 10, f'{int(aircraft.mtow) - int(aircraft.tow)}'
+                     f'kg', 'B', 2, 'L')
     pdf.cell(-60)
     # Max
     pdf.cell(60, 10, 'Maximum is:', 0, 0, 'L')
     pdf.cell(40, 10, f'{aircraft.mtow}kg', 'B', 2, 'L')
     pdf.cell(-60)
+    # Dispatcher Signature
+    pdf.cell(60, 20, 'Dispatcher Signature', 0, 0, 'L')
+    pdf.cell(80, 20, '', 'B', 2, 'L')
+    pdf.cell(-60)
+    # Captain Signature
+    pdf.cell(60, 20, 'Captain Signature', 0, 0, 'L')
+    pdf.cell(80, 20, '', 'B', 2, 'L')
+    pdf.cell(-60)
 
     pdf.set_font('arial', '', 12)
+    pdf.close()
     pdf.output('loadsheet.pdf', 'F')
+    pdf.output('loadsheeeet.pdf', 'D')

@@ -242,7 +242,7 @@ The method for cloning a project from GitHub is below:
 
 [Back to top](<#contents>)
 # Credits
-* The Github python project template from The Code Institute forms the framework of this project.
+* The Github [python project template](https://github.com/Code-Institute-Org/python-essentials-template-v1) from The Code Institute forms the framework of this project.
 * Non-original code is credited as comments in the [functions.py](functions.py) file.
 * Images for the Readme-Definitions-Aircraft section came from [Google Images](https://www.google.com/imghp?hl=en).
 

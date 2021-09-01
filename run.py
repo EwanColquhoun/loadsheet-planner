@@ -238,8 +238,7 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
         if tow > aircraft.mtow:
             print()
             typing(f"The take off weight is {tow}kg, "
-                   f"maximum is {aircraft.mtow}kg\n", 0.02
-                   )
+                   f"maximum is {aircraft.mtow}kg\n", 0.02)
             print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
             typing("Please remove cargo, passengers or fuel:\n", 0.02)
             print("a) Cargo")
@@ -289,14 +288,15 @@ def print_loadsheet(aircraft, adults, children):
     print(f'Passengers:{adults} Adults\n'
           f'           {children} Children\n')
     print(f'Basic Weight:  {aircraft.eWeight}kg')
-    print(f'Fuel in tanks: {aircraft.fuel}kg')
     print(f'Traffic Load:  {aircraft.traffic_load}kg')
     print(f'Cargo:         {aircraft.cargo}kg')
-    print(f'Underload:     {int(aircraft.mtow) - int(aircraft.tow)}kg')
     print('-' * 78)
     print(f'ZFW:           {zfw}kg')
     print('-' * 78)
-    print(f"TOW:           {aircraft.tow}kg")
+    print(f'Fuel in tanks: {aircraft.fuel}kg')
+    print('-' * 78)
+    print(f"TOW:           {aircraft.tow}kg ---- Underload:"
+          f" {int(aircraft.mtow) - int(aircraft.tow)}kg")
     print('-' * 78)
     print(f"MTOW           {aircraft.mtow}kg")
     print('-' * 78)

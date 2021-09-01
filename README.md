@@ -1,7 +1,7 @@
 # Loadsheet Planner
 
 The Loadsheet planner application is designed for use by an airline dispatcher to quickly calculate the acceptable loads whilst preparing an aircraft for dispatch. <br>
-It is designed to take a number of inputs from the user to narrow down the acceptable fuel, passenger and cargo loads available to them. In this scenario the fuel, passenger and cargo loads would have already been passed from the company and Flight Crew.
+It is designed to take a number of inputs from the user to narrow down the acceptable fuel, passenger and cargo loads available to them. For the purpose of this application the fuel, passenger and cargo loads would have already been passed to the user from the company and Flight Crew.
 
 To try your hand planning a loadsheet please click [**here**](https://loadsheet-planner.herokuapp.com/).
 
@@ -21,6 +21,8 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * [**Future Features**](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)
+    * [Bugs](<#bugs>)
+    * [Testing User Stories](<#testing-user-stories>)
 * [**Deployment**](<#deployment>)
 * [**Credits**](<#credits>)
 * [**Caveats**](<#caveats>)
@@ -50,8 +52,8 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * Jetstream 41 [![J41 image](assets/images/j41.jpg)](https://en.wikipedia.org/wiki/British_Aerospace_Jetstream_41)
 
 * Terminology - 
-    * [**Loadsheet**](https://www.linkedin.com/pulse/aircraft-loadsheet-peter-irungu/) - Provides the crew with the various weights that are crutial for te flight. Compiled for information from the airline (passenger and cargo figures) and the crew themselves (fuel, aircraft specific weights).
-    * [**Aircraft Dispatcher**](https://www.myworldofwork.co.uk/my-career-options/job-profiles/flight-dispatcher) - Provides the Pilots with the weight and balance information relevant to the flight. Also is the liason between the Pilots and the loading staff for both bags and passengers.
+    * [**Loadsheet**](https://www.linkedin.com/pulse/aircraft-loadsheet-peter-irungu/) - Provides the crew with the various weights that are crucial for te flight. Compiled for information from the airline (passenger and cargo figures) and the crew themselves (fuel, aircraft specific weights).
+    * [**Aircraft Dispatcher**](https://www.myworldofwork.co.uk/my-career-options/job-profiles/flight-dispatcher) - Provides the Pilots with the weight and balance information relevant to the flight. Also is the liaison between the Pilots and the loading staff for both bags and passengers.
     * **Flight crew** - In this case Pilots, could include loadmaster and navigatior in other cases.
     * **Basic Weight** (eWeight in this app) - The weight of the aircraft without passengers, baggage or usable fuel.
     * **Traffic load** - For this app it is the mass of the passengers and bags. Often      cargo mass is also included in this definition.
@@ -147,14 +149,41 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 # Testing
 Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html).
 ![PEP8 results image](assets/images/pep8.png)
-# Bugs
-## Resolved bugs
+## Bugs
+### Resolved bugs
 * In the check_max_weight function, there is a call for the passenger_quantity function. The passenger_quantity function returns a tuple of 4 values. When called within the parent function the last two values of the tuple aren't used. This was throwing an 'unused variable' error. To get around this both variables were assigned the value of 0.
 
 ![Resolved image](assets/images/resolved.png)
 
-## Unresolved bugs
+### Unresolved bugs
 * There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
+
+## Testing User stories
+
+### User Stories
+
+* As a user I want to input data to create a loadsheet.
+    * There are many input features for the user, **aircraft choice, fuel, passenger quantity** and **cargo quantity.**
+* As a user I want to select which aircraft I am loading.
+    * The **first input** in the Loadsheet Planner is to choose which aircraft you will load. This is a vital step as each aircraft is suited to a particular type of flying eg, domestic, long-haul and cargo.
+* As a user I want to input the fuel load.
+    * After choosing your aircraft the next input is for **fuel quantity.**
+* As a user I want to input the requested Passenger numbers.
+    * After the fuel input the next is **passenger quantity** with both adult and children options.
+* As a user I want to input the amount of cargo.
+    * If there is **sufficient weight left (underload)** the option to **load cargo** will follow the passenger quantity input. If the user wanted to operate a cargo only flight they would simply enter '0' passengers.
+* As a user I want to know that my inputs are correct.
+    * After each input the user is informed that their choice or **selection is valid**. If not, it flags an error and the user is infomred how to correct it.
+
+### Owner Stories
+
+* As an owner I want to ensure the data entered is correct and valid.
+    * There is **validation** built into the Loadsheet Planner. It checks that each input is within a set range and returns an error to the user if incorrect.
+* As an owner I want to ensure the loadsheet is useable by those detached from the input process.
+    * When the loadsheet is **printed** it has all the relevant information on it in a clear and consise manor. This layout minimises the risk of misinterpretation of data. All the user would need to do is print the loadsheet and hand it to the Flight Crew. They would then extract the data they need for the flight.
+
+## Additional testing
+* The Loadsheet Planner has been tested by peers both in the aviation industry and external to it. It has met their expectations based on this brief. It has even been requested as an aternative to the manual version currently in existance in some airlines. 
 
 [Back to top](<#contents>)
 # Deployment
@@ -182,7 +211,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 
 1. Navigate to the "Deploy" section.
 2. Scroll down to "Deployment Method" and select "GitHub".
-3. Authorize the connection of Heroku to GitHub.
+3. Authorise the connection of Heroku to GitHub.
 4. Search for your GitHub repository name, and select the correct repository.
 5. For Deployment there are two options, Automatic Deployments or Manual.
     - Automatic Deployment: This will prompt Heroku to re-build your app each time you push your code to GitHub.
@@ -197,7 +226,7 @@ A copy of the GitHub Repository can be made by forking the repository. This copy
 ![GitHub forking process image](assets/images/forking.png)
 
 ### **To create a local clone of this project**
-The method from cloning a project from GitHub is below:
+The method for cloning a project from GitHub is below:
 
 1. Under the repository’s name, click on the **code** tab.
 2. In the **Clone with HTTPS** section, click on the clipboard icon to copy the given URL.
@@ -221,7 +250,7 @@ Another feature that would need altering slightly is the passenger and baggage w
 [Back to top](<#contents>)
 # Acknowledgements
 
-The Loadsheet Planner application was created as Portfolio Project 3 for the Full Stack Software Developer diploma by the [Code Institute](https://codeinstitute.net/). It was enjoyable to create something that with a little development could be used within the aviation industry and have a tangable purpose. <br><br>
+The Loadsheet Planner application was created as Portfolio Project 3 for the Full Stack Software Developer diploma by the [Code Institute](https://codeinstitute.net/). It was enjoyable to create something that with a little development could be used within the aviation industry and have a tangible purpose. <br><br>
 I would like to thank my mentor, [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community and all at the Code Institute who have helped me along the way. 
 
 [Back to top](<#contents>)

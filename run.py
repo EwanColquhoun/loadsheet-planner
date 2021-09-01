@@ -273,7 +273,7 @@ def print_loadsheet(aircraft, adults, children):
            + int(aircraft.traffic_load)
            + int(aircraft.cargo))
 
-    typing('Printing loadsheet.................\n', 0.01)
+    typing('Printing loadsheet......................\n', 0.01)
     time.sleep(1)
     print('.' * 40)
     time.sleep(1)

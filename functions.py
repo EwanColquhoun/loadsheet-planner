@@ -53,42 +53,42 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(-40)
     # Passengers
     pdf.cell(60, 10, 'Passengers:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{adults} Adult, {children} Children', 0, 2, 'L')
+    pdf.cell(60, 10, f'{adults} Adult, {children} Children', 'B', 2, 'L')
     pdf.cell(-60)
     # Basic Weight
     pdf.cell(60, 10, 'Basic Weight:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{aircraft.eWeight}kg', 0, 2, 'L')
+    pdf.cell(40, 10, f'{aircraft.eWeight}kg', 'B', 2, 'L')
+    pdf.cell(-60)
+    # Traffic Load
+    pdf.cell(60, 10, 'Traffic Load: ', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.traffic_load}kg', 'B', 2, 'L')
+    pdf.cell(-60)
+    # Cargo
+    pdf.cell(60, 10, 'Cargo:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{aircraft.cargo}kg', 'B', 0, 'L')
+    pdf.cell(40, 10, f'MAX: {int(aircraft.mtow) - int(aircraft.tow)}'
+             f'kg', 'B', 2, 'L')
+    pdf.cell(-100)
+    # ZFW
+    pdf.cell(60, 10, 'ZFW (zero fuel weight):', 0, 0, 'L')
+    pdf.cell(40, 10, f'{zfw}kg', 'B', 2, 'L')
     pdf.cell(-60)
     # Fuel
     pdf.cell(60, 10, 'Fuel in Tanks:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{aircraft.fuel}kg', 0, 0, 'L')
-    pdf.cell(40, 10, f'MAX: {aircraft.maxFuel}', 0, 2, 'L')
+    pdf.cell(40, 10, f'{aircraft.fuel}kg', 'B', 0, 'L')
+    pdf.cell(40, 10, f'MAX: {aircraft.maxFuel}', 'B', 2, 'L')
     pdf.cell(-100)
-    # Traffic Load
-    pdf.cell(60, 10, 'Traffic Load: ', 0, 0, 'L')
-    pdf.cell(40, 10, f'{aircraft.traffic_load}kg', 0, 0, 'L')
-    pdf.cell(-100)
-    # Cargo
-    pdf.cell(60, 10, 'Cargo:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{aircraft.cargo}kg', 0, 0, 'L')
-    pdf.cell(40, 10, f'MAX: {int(aircraft.mtow) - int(aircraft.tow)}'
-             f'kg', 0, 2, 'L')
-    pdf.cell(-100)
-    # Underload
-    pdf.cell(60, 10, 'Underload:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{int(aircraft.mtow) - int(aircraft.tow)}kg', 0, 2, 'L')
-    pdf.cell(-60)
-    # ZFW
-    pdf.cell(60, 10, 'ZFW (zero fuel weight):', 0, 0, 'L')
-    pdf.cell(40, 10, f'{zfw}kg', 0, 2, 'L')
-    pdf.cell(-60)
     # TOW
     pdf.cell(60, 10, 'TOW (take-off weight):', 0, 0, 'L')
-    pdf.cell(40, 10, f'{aircraft.tow}kg', 0, 2, 'L')
+    pdf.cell(40, 10, f'{aircraft.tow}kg', 'B', 2, 'L')
+    pdf.cell(-60)
+    # Underload
+    pdf.cell(60, 10, 'Underload:', 0, 0, 'L')
+    pdf.cell(40, 10, f'{int(aircraft.mtow) - int(aircraft.tow)}kg', 'B', 2, 'L')
     pdf.cell(-60)
     # Max
     pdf.cell(60, 10, 'Maximum is:', 0, 0, 'L')
-    pdf.cell(40, 10, f'{aircraft.mtow}kg', 0, 2, 'L')
+    pdf.cell(40, 10, f'{aircraft.mtow}kg', 'B', 2, 'L')
     pdf.cell(-60)
 
     pdf.set_font('arial', '', 12)

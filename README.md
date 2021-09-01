@@ -23,6 +23,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 * [**Testing**](<#testing>)
     * [Bugs](<#bugs>)
     * [Testing User Stories](<#testing-user-stories>)
+    * [Additional Testing](<#additional-testing>)
 * [**Deployment**](<#deployment>)
 * [**Credits**](<#credits>)
 * [**Caveats**](<#caveats>)
@@ -144,6 +145,8 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 * [Lucid Charts](https://www.lucidchart.com/) - to create the flow diagram.
 * [OBS Studio](https://obsproject.com/) - to record the screen for the gif.
 * [ezgif](https://ezgif.com/) - to create the gif for the top of the readme file.
+* [FPDF](http://www.fpdf.org/) - Python library used to generate pdfs (loadsheet in this case).
+* [PEP8](http://pep8online.com/) - for testing and validating the code.
 
 [Back to top](<#contents>)
 # Testing
@@ -157,6 +160,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 
 ### Unresolved bugs
 * There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
+* At the time of writing, whilst using the Code Institute mock terminal I have been unable to get it to print the loadsheet to a pdf in a new browser tab. Whilst not needed for the Loadsheet Planner app in its current form it would be a nice feature to impliment in further versions.
 
 ## Testing User stories
 
@@ -196,7 +200,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 3. Create or Login to your Heroku account.
 4. Navigate to Dashboard. 
 5. Click "New" and select "create new app" from the drop-down menu. This is found in the upper right portion of the window. 
-6. Provide a name for your application, this needs to be unique, and select your region.
+6. Provide a unique name for your application and select your region.
 7. Click "Create App".
 ![New app image](assets/images/new-app.png)
 

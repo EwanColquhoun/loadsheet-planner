@@ -119,20 +119,17 @@ creates an instance of the aircraft chosen. The respective loading figures are t
     Incorrect input character <br>
     ![Pax error image](assets/images/pax-error.png)</details>
 
-* **No underload** <details><summary>Screenshots</summary>
-    This feature prevent the loading of cargo as the aircraft is already too heavy. It directs the user to remove either some passengers, fuel or previously loaded cargo. <br>
-    ![Underload Image](assets/images/no-underload.png)</details>
-
 * **Cargo input** <details><summary>Screenshots</summary>
 
     Initial cargo input <br>
     <img src="assets/images/cargo-input.png" alt="Cargo input image">
 
-    Too much cargo <br>
-    ![Too much cargo image](assets/images/high-cargo.png)
-
     Incorrect input character <br>
     ![Incorrect cargo](assets/images/cargo-error.png)</details>
+
+* **High Take-off weight** <details><summary>Screenshots</summary>
+    This feature prevents the aircraft from being loaded above the maximum take-off weight. If overweight, it gives the user the choice to remove passengers, fuel or cargo.<br>
+    ![Underload Image](assets/images/high-tow.png)</details>
 
 * **Print Loadsheet** <details><summary>Screenshots</summary>
     Prints the compiled loadsheet to the application interface and gives the user the option to load another flight or exit. <br>

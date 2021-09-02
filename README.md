@@ -29,7 +29,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 * [**Caveats**](<#caveats>)
 *  [**Acknowledgements**](<#acknowledgements>)
 
-# User Experience
+# User Experience UX
 
 ## User Stories
 
@@ -53,9 +53,9 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * Jetstream 41 [![J41 image](assets/images/j41.jpg)](https://en.wikipedia.org/wiki/British_Aerospace_Jetstream_41)
 
 * Terminology - 
-    * [**Loadsheet**](https://www.linkedin.com/pulse/aircraft-loadsheet-peter-irungu/) - Provides the crew with the various weights that are crucial for te flight. Compiled for information from the airline (passenger and cargo figures) and the crew themselves (fuel, aircraft specific weights).
-    * [**Aircraft Dispatcher**](https://www.myworldofwork.co.uk/my-career-options/job-profiles/flight-dispatcher) - Provides the Pilots with the weight and balance information relevant to the flight. Also is the liaison between the Pilots and the loading staff for both bags and passengers.
-    * **Flight crew** - In this case Pilots, could include loadmaster and navigatior in other cases.
+    * [**Loadsheet**](https://www.linkedin.com/pulse/aircraft-loadsheet-peter-irungu/) - Provides the crew with the various weights that are crucial for the flight. Compiled with information from the airline (passenger and cargo figures) and the crew themselves (fuel, aircraft specific weights).
+    * [**Aircraft Dispatcher**](https://www.myworldofwork.co.uk/my-career-options/job-profiles/flight-dispatcher) - Provides the Pilots with the weight and balance information relevant to the flight. Also acts as the liaison between the Pilots and the loading staff.
+    * **Flight crew** - In this case Pilots, could include loadmaster and navigatior if carried.
     * **Basic Weight** (eWeight in this app) - The weight of the aircraft without passengers, baggage or usable fuel.
     * **Traffic load** - For this app it is the mass of the passengers and bags. Often      cargo mass is also included in this definition.
     * **Cargo** - For this app it is the mass of cargo (could be baggage, animals, cars, ppe etc) that is in the aircraft hold (under the passengers).
@@ -70,7 +70,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 1. Select a, b or c to choose the aircraft you are going to load.
 2. Input the fuel figure (in kg) that has been passed to you by the Flight crew.
 3. Input the passenger numbers (adult/children) that has been passed to you by the Airline.
-4. The Loadsheet Planner calculates the aircraft's underload.
+4. The Loadsheet Planner calculates the aircraft's underload. 
 5. If you have an underload, you can input the amount of cargo you require.
 6. The loadsheet prints automatically on completion of the above steps. Currently it prints to the app interface.
 7. The user is then given an option to load another flight or exit.
@@ -160,7 +160,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 
 ### Unresolved bugs
 * There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
-* At the time of writing, whilst using the Code Institute mock terminal I have been unable to get it to print the loadsheet to a pdf in a new browser tab. Whilst not needed for the Loadsheet Planner app in its current form it would be a nice feature to impliment in further versions.
+* At the time of writing, whilst using the Code Institute mock terminal I have been unable to get it to print the loadsheet to a pdf in a new browser tab. Whilst not needed for the Loadsheet Planner app in its current form, it would be a nice feature to impliment in further versions.
 
 ## Testing User stories
 
@@ -187,7 +187,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
     * When the loadsheet is **printed** it has all the relevant information on it in a clear and consise manor. This layout minimises the risk of misinterpretation of data. All the user would need to do is print the loadsheet and hand it to the Flight Crew. They would then extract the data they need for the flight.
 
 ## Additional testing
-* The Loadsheet Planner has been tested by peers both in the aviation industry and external to it. It has met their expectations based on this brief. It has even been requested as an aternative to the manual version currently in existance in some airlines. 
+* The Loadsheet Planner has been tested by peers both in the aviation industry and external to it. It has met their expectations based on this brief. It has even been requested as an alternative to the manual version currently in existance in some airlines. 
 
 [Back to top](<#contents>)
 # Deployment

@@ -1,4 +1,3 @@
-# import time and sys module for typing effect function.
 import sys
 import time
 import os
@@ -42,10 +41,10 @@ def output_pdf(aircraft, adults, children):
     zfw = (int(aircraft.eWeight)
            + int(aircraft.traffic_load)
            + int(aircraft.cargo))
-    pdf = FPDF()
+    pdf = FPDF(orientation='P', unit='mm', format='A4')
     pdf.add_page()
     pdf.set_xy(0, 30)
-    pdf.set_font('arial', 'B', 14)
+    pdf.set_font('helvetica', 'B', 14,)
     pdf.cell(60)
     pdf.cell(75, 30, f'LOADSHEET for {aircraft.model} on '
              f'{now.strftime("%Y-%m-%d")} at '
@@ -99,8 +98,4 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(60, 20, 'Captain Signature', 0, 0, 'L')
     pdf.cell(80, 20, '', 'B', 2, 'L')
     pdf.cell(-60)
-
-    pdf.set_font('arial', '', 12)
-    pdf.close()
-    pdf.output('loadsheet.pdf', 'F')
-    pdf.output('loadsheeeet.pdf', 'D')
+    pdf.output('loadsheet.pdf')

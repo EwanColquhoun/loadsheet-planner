@@ -37,10 +37,6 @@ def opening_text():
 class Aircraft:
     """
     Creates an instance of an Aircraft
-    maxPax = maximum passengers,
-    pax = number of passengers,
-    eWeight = empyt weight of the aircraft without fuel, cargo and pax,
-    mtow = Maximum allowed take-off weight.
     """
     def __init__(self, model, maxPax, pax, traffic_load, maxFuel,
                  fuel, cargo, eWeight, tow, mtow):
@@ -59,7 +55,7 @@ class Aircraft:
 def select_aircraft():
     """
     Asks the user to input which aircraft they would like to load.
-    if the input is invalid (not a,b or c) it returns an error and asks
+    If the input is invalid (not a,b or c) it returns an error and asks
     the user to try again.
     """
     while True:
@@ -96,6 +92,7 @@ def fuel_quantity(aircraft):
     while True:
         typing("Fuel quantity...\n", 0.02)
         minFuel = round(0.02 * aircraft.maxFuel)
+        typing(f"Current fuel load is {aircraft.fuel}kg.\n", 0.02)
         typing(f"The maximum fuel is {aircraft.maxFuel}kg\n", 0.02)
         typing(f"The minimum fuel is {minFuel}kg.\n", 0.02)
         fuel = input("Please enter the total fuel in kg. "
@@ -134,14 +131,15 @@ def calculate_underload(aircraft, fuel, traffic_load):
 
 def passenger_quantity(aircraft):
     """
-    Defines the maximum quantity of passengers available to upload based on the
-    underload the aircraft has. It asks for an input of passenger numbers.
-    It checks for validity both in type and quantity and feedsback to the
-    user if there are any errors or if they are successful with their input.
+    Defines the maximum quantity of passengers available to load.
+    It asks for an input of passenger numbers.
+    It checks for validity both in type and quantity and
+    provides feedback to the user.
     """
     while True:
         print()
         typing("Passenger quantity...\n", 0.02)
+        typing(f"Current passenger load is {aircraft.pax}\n", 0.02)
         typing(f"Maximum number of passengers is {aircraft.maxPax}.\n", 0.02)
         typing("Passenger weights are 86kg for "
                "adults and 35kg for children\n", 0.02)
@@ -174,7 +172,7 @@ def passenger_quantity(aircraft):
                 return pax, traffic_load, adult_pax, child_pax
         except ValueError:
             print()
-            print("Please enter passenger figure as a whole number only.")
+            print("-----PLEASE ENTER PASSENGERS AS A WHOLE NUMBER-----")
 
 
 def load_passengers(aircraft, pax, traffic_load):
@@ -188,47 +186,33 @@ def load_passengers(aircraft, pax, traffic_load):
 
 def cargo_quantity(aircraft, underload):
     """
-    Inputs the amount of cargo for the flight in kg. Validates the input
-    then loads it onto the aircraft class instance.
+    Asks for an input to represent the amount of cargo the user
+    would like to carry.
     """
-    cargo_load = 0
-    if '-' in str(underload):
-        print()
-        typing("Cargo quantity...\n", 0.02)
-        typing("Cargo is loaded if you have any underload.\n", 0.02)
-        typing(f"Your underload is {underload}kg"
-               f" (minus means 'too heavy by')\n", 0.02)
-        print()
-        print('----Your aircraft is too heavy for cargo today----')
-        return cargo_load
     while True:
         print()
         typing("Cargo quantity...\n", 0.02)
-        typing("Cargo is loaded if you have any spare underload.\n", 0.02)
-        typing(f"Your underload is {underload}kg.\n", 0.02)
-        cargo_load = input("Please enter your cargo load in kg, eg, 5500: \n")
+        typing(f"Current cargo load is {aircraft.cargo}kg.\n", 0.02)
+        cargo_load = input("Please enter your requested"
+                           " cargo load in kg, eg, 5500: \n")
 
         try:
             if cargo_load == '' or int(cargo_load) < 0:
                 print()
                 print("-----PLEASE ENTER 0 IF NO CARGO-----")
-            elif int(cargo_load) > int(underload):
-                print()
-                print("-----CARGO QUANTITY TOO HIGH------")
-                print(f"Max cargo is {underload}kg.")
             else:
                 typing(f"{cargo_load} is valid and has been accepted.\n", 0.02)
                 aircraft.cargo = cargo_load
                 return cargo_load
         except ValueError:
             print()
-            print("Please enter cargo figure as a whole number only.")
+            print("-----PLEASE ENTER CARGO AS A WHOLE NUMBER-----\n")
 
 
 def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
     """
-    Performs a calculation to see if the aircrafts take-off
-    weight it acceptable. Dependant on fuel and passenger load.
+    Performs a calculation to see if the take-off
+    weight it acceptable.
     """
     while True:
         tow = (int(aircraft.eWeight)
@@ -240,7 +224,9 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
             print()
             typing(f"The take off weight is {tow}kg, "
                    f"maximum is {aircraft.mtow}kg\n", 0.02)
-            print("-----TAKE-OFF WEIGHT IS ABOVE MAXIMUM-----\n")
+            print()
+            print(f"----TAKE-OFF WEIGHT IS {abs(aircraft.mtow - tow)}"
+                  f"kg ABOVE MAXIMUM----\n")
             typing("Please remove cargo, passengers or fuel:\n", 0.02)
             print("a) Cargo")
             print("b) Passengers")
@@ -338,7 +324,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()
+    # opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     pax, traffic_load, adults, children = passenger_quantity(aircraft)

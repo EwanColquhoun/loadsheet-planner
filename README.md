@@ -16,6 +16,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * [Instructions](<#instructions>)
 * [**Data Model**](<#data-model>)
     * [Code flow charts](<#code-flow-charts>)
+    * [Class model](<#class-model>)
 * [**Features**](<#features>)
     * [**Existing Features**](<#existing-features>)
     * [**Future Features**](<#future-features>)
@@ -80,7 +81,12 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 
 ## Code flow charts
 
-![Code flow charts images](/assets/images/LSFlow.png)
+![Code flow charts images](/assets/images/ls-flow.png)
+
+## Class model
+The application is based on python classes. The return value from the select_aircraft function
+creates an instance of the aircraft chosen. The respective loading figures are then populated into that instance to 'create' the loaded aircraft.
+![Class model image](assets/images/aircraft-class.png)
 
 [Back to top](<#contents>)
 # Features

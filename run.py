@@ -122,10 +122,10 @@ def calculate_underload(aircraft, fuel, traffic_load):
     Calculates the useful load to the user. This indicated how much additional
     weight the aircraft can carry. i.e passengers and cargo.
     """
-    underload = (int(aircraft.mtow)
-                 - int(aircraft.eWeight)
-                 - int(aircraft.fuel)
-                 - int(traffic_load))
+    underload = (int(aircraft.mtow) -
+                 int(aircraft.eWeight) -
+                 int(aircraft.fuel) -
+                 int(traffic_load))
     return underload
 
 
@@ -215,10 +215,10 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
     weight it acceptable.
     """
     while True:
-        tow = (int(aircraft.eWeight)
-               + int(aircraft.traffic_load)
-               + int(aircraft.cargo)
-               + int(aircraft.fuel))
+        tow = (int(aircraft.eWeight) +
+               int(aircraft.traffic_load) +
+               int(aircraft.cargo) +
+               int(aircraft.fuel))
 
         if tow > aircraft.mtow:
             print()
@@ -256,9 +256,9 @@ def print_loadsheet(aircraft, adults, children):
     Function called once all inputs and data are compiled and validated.
     Prints results.
     """
-    zfw = (int(aircraft.eWeight)
-           + int(aircraft.traffic_load)
-           + int(aircraft.cargo))
+    zfw = (int(aircraft.eWeight) +
+           int(aircraft.traffic_load) +
+           int(aircraft.cargo))
 
     typing('Printing loadsheet......................\n', 0.01)
     time.sleep(1)

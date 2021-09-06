@@ -155,7 +155,7 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 
 [Back to top](<#contents>)
 # Testing
-Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html).
+Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html). To ensure compliance with the current published PEP8 requirements the 'errors' with the line breaks have been rectified. The code passes PEP8 with no errors.
 ![PEP8 results image](assets/images/pep8.png)
 [Back to top](<#contents>)
 ## Bugs
@@ -247,12 +247,12 @@ The method for cloning a project from GitHub is below:
 4. Change the current working directory to the location where you want the cloned directory to be made.
 5. Type **git clone**, and then paste the URL copied from GitHub.
 6. Press **enter** and the local clone will be created.
-7. To install the project libraries enter the following commands into your IDE console:
+7. To install the project libraries enter the following commands into your IDE terminal:
 > pip3 install fpdf
 
 > pip3 install fpdf2 
 
-8. To run the application from your IDE enter the following command into your IDE console:
+8. To run the application from your IDE you need to run the 'run.py' file in a server. To do this in GitPod you enter the following into the terminal:
 > python3 run.py
 
 [Back to top](<#contents>)

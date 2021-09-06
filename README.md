@@ -1,7 +1,7 @@
 # Loadsheet Planner
 
 The Loadsheet planner application is designed for use by an airline dispatcher to quickly calculate the acceptable loads whilst preparing an aircraft for dispatch. <br>
-It is designed to take a number of inputs from the user to narrow down the acceptable fuel, passenger and cargo loads available to them. For the purpose of this application the fuel, passenger and cargo loads would have already been passed to the user from the company and Flight Crew.
+It is designed to take a number of inputs from the user to narrow down the acceptable fuel, passenger and cargo loads available to them. For the purpose of this application the fuel, passenger and cargo loads would have already been passed to the user from the Airline and Flight Crew.
 
 To try your hand planning a loadsheet please click [**here**](https://loadsheet-planner.herokuapp.com/).
 
@@ -18,8 +18,8 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
     * [Code flow charts](<#code-flow-charts>)
     * [Class model](<#class-model>)
 * [**Features**](<#features>)
-    * [**Existing Features**](<#existing-features>)
-    * [**Future Features**](<#future-features>)
+    * [Existing Features](<#existing-features>)
+    * [Future Features](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)
     * [Bugs](<#bugs>)
@@ -71,8 +71,9 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 1. Select a, b or c to choose the aircraft you are going to load.
 2. Input the fuel figure (in kg) that has been passed to you by the Flight crew.
 3. Input the passenger numbers (adult/children) that has been passed to you by the Airline.
-4. The Loadsheet Planner calculates the aircraft's underload. 
-5. If you have an underload, you can input the amount of cargo you require.
+4. Input the cargo quantity (in kg) that has been requested by the Airline.
+5. The Loadsheet Planner will check that the weights are all within the prescribed limits.
+    If not it will give the user an option to alter some of the load.
 6. The loadsheet prints automatically on completion of the above steps. Currently it prints to the app interface.
 7. The user is then given an option to load another flight or exit.
 
@@ -83,6 +84,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 
 ![Code flow charts images](/assets/images/ls-flow.png)
 
+[Back to top](<#contents>)
 ## Class model
 The application is based on python classes. The return value from the select_aircraft function
 creates an instance of the aircraft chosen. The respective loading figures are then populated into that instance to 'create' the loaded aircraft.
@@ -138,7 +140,7 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 
 [Back to top](<#contents>)
 ## Future Features
-* The loadsheet displaying on the browser screen. Within the confines of the CI template this feature isn't easily possible. For this release the loadsheet is stored as a pdf in the workspace after it is printed to the screen. eg; [Loadsheet](loadsheet.pdf).
+* The loadsheet displaying on the browser screen. Within the confines of the CI template this feature isn't easily possible. For this release the loadsheet is stored as a pdf in the workspace after it is printed to the screen. Currently not accessible by the user. eg; [Loadsheet](loadsheet.pdf).
 
 [Back to top](<#contents>)
 # Technologies Used
@@ -155,6 +157,7 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 # Testing
 Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html).
 ![PEP8 results image](assets/images/pep8.png)
+[Back to top](<#contents>)
 ## Bugs
 ### Resolved bugs
 * In the check_max_weight function, there is a call for the passenger_quantity function. The passenger_quantity function returns a tuple of 4 values. When called within the parent function the last two values of the tuple aren't used. This was throwing an 'unused variable' error. To get around this both variables were assigned the value of 0.
@@ -165,6 +168,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 * There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
 * At the time of writing, whilst using the Code Institute mock terminal I have been unable to get it to print the loadsheet to a pdf in a new browser tab. Whilst not needed for the Loadsheet Planner app in its current form, it would be a nice feature to impliment in further versions.
 
+[Back to top](<#contents>)
 ## Testing User stories
 
 ### User Stories
@@ -189,6 +193,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 * As an owner I want to ensure the loadsheet is useable by those detached from the input process.
     * When the loadsheet is **printed** it has all the relevant information on it in a clear and consise manor. This layout minimises the risk of misinterpretation of data. All the user would need to do is print the loadsheet and hand it to the Flight Crew. They would then extract the data they need for the flight.
 
+[Back to top](<#contents>)
 ## Additional testing
 * The Loadsheet Planner has been tested by peers both in the aviation industry and external to it. It has met their expectations based on this brief. It has even been requested as an alternative to the manual version currently in existance in some airlines. 
 
@@ -249,8 +254,9 @@ The method for cloning a project from GitHub is below:
 * Non-original code is credited as comments in the [functions.py](functions.py) file.
 * Images for the Readme-Definitions-Aircraft section came from [Google Images](https://www.google.com/imghp?hl=en).
 
+[Back to top](<#contents>)
 # Caveats
-The Loadsheet Planner application is based on a real world process. However this project is not suitable for real world use within the aviation industry. To enable it to be used for actual flight dispatch a number of items would need altered. It would need to take the specifics of each aircraft an airline has, each individual aircraft also weighs slightly differently depending on a number of factors. <br>
+The Loadsheet Planner application is based on a real world process. However this project is not suitable for real world use within the aviation industry. To enable it to be used for actual flight dispatch a number of items would need altered. It would need to take the specifics of each aircraft an airline has, each individual aircraft weighs slightly differently depending on a number of factors. <br>
 At the planning stage the other fuel figure that is needed is that 'taxi fuel'. This is the fuel use between engine start up and take off. Whilst not important for the functionallity of this application, in a real world context it could mean that an aircraft was heavier than the perfomance figures would allow had it not been entered. <br>
 Another feature that would need altering slightly is the passenger and baggage weights. There are [standard passenger weights](https://www.legislation.gov.uk/uksi/2006/601/body/made?view=plain) that can be used depending on the flight type and duration. This would be known by the user in advance so could be amended before application use if required.
 

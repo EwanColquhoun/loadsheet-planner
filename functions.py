@@ -1,6 +1,5 @@
 import sys
 import time
-import os
 import datetime
 from fpdf import FPDF
 
@@ -25,15 +24,7 @@ def typing(text, speed):
         time.sleep(speed)
 
 
-# code from http://www.coding4you.at/inf_tag/beginners_python_cheat_sheet.pdf
-def clear_terminal():
-    """
-    Clearing the terminal.
-    """
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-# http://www.fpdf.org/ used to output a PDF into the workspace.
+# http://www.fpdf.org/ Library - My template for the loadsheet creation.
 def output_pdf(aircraft, adults, children):
     """
     Uses FPDF to create a pdf of the loadsheet.

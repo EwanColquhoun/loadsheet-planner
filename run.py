@@ -1,4 +1,4 @@
-from functions import typing, clear_terminal, output_pdf
+from functions import typing, output_pdf
 import datetime
 import time
 
@@ -298,7 +298,6 @@ def another_flight():
     next_flight = input("Do you wish to load another flight? Y or N\n")
 
     if next_flight.lower() == 'y':
-        clear_terminal()
         main()
         return
     elif next_flight.lower() == 'n':
@@ -306,7 +305,6 @@ def another_flight():
         print('Your flight has departed. '
               'Thank you for using Loadsheet Planner.\n')
         time.sleep(2)
-        clear_terminal()
         print('-' * 78)
         print('\nPlease click on the "Run Loadsheet Planner" '
               'button to begin\n')

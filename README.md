@@ -247,6 +247,13 @@ The method for cloning a project from GitHub is below:
 4. Change the current working directory to the location where you want the cloned directory to be made.
 5. Type **git clone**, and then paste the URL copied from GitHub.
 6. Press **enter** and the local clone will be created.
+7. To install the project libraries enter the following commands into your IDE console:
+> pip3 install fpdf
+
+> pip3 install fpdf2 
+
+8. To run the application from your IDE enter the following command into your IDE console:
+> python3 run.py
 
 [Back to top](<#contents>)
 # Credits

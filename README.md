@@ -155,6 +155,7 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 * [ezgif](https://ezgif.com/) - to create the gif for the top of the readme file.
 * [FPDF](http://www.fpdf.org/) - Python library used to generate pdfs (loadsheet in this case).
 * [PEP8](http://pep8online.com/) - for testing and validating the code.
+* [Google Sheets](https://www.google.co.uk/sheets/about/) - to create the printable spreadsheet.
 
 [Back to top](<#contents>)
 # Testing
@@ -169,7 +170,6 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 
 ### Unresolved bugs
 * There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
-* At the time of writing, whilst using the Code Institute mock terminal I have been unable to get it to print the loadsheet to a pdf in a new browser tab. Whilst not needed for the Loadsheet Planner app in its current form, it would be a nice feature to impliment in further versions.
 
 [Back to top](<#contents>)
 ## Testing User stories

@@ -296,6 +296,9 @@ def print_loadsheet(aircraft, adults, children):
     print(f"MTOW           {aircraft.mtow}kg")
     print('-' * 78)
     print('-' * 78)
+    print('To view your loadsheet in printable format please click')
+    print(' the "View loadsheet here" button below.')
+    print()
 
 
 def another_flight():

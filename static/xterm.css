@@ -172,8 +172,7 @@
     text-decoration: underline;
 }
 
-button,
-a {
+button {
     width: 200px;
     height: 40px;
     background-color: #E84610;
@@ -182,4 +181,19 @@ a {
     text-transform: uppercase;
     margin: 10px;
     border-radius: 8px;
+}
+
+#loadsheet {
+    width: 200px;
+    height: 40px;
+    background-color: #1bf01b;
+    border: 1px solid grey;
+    color: white;
+    text-transform: uppercase;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+button:hover {
+    transform: scale(1.1, 1.1);
 }

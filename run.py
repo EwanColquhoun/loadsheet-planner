@@ -1,7 +1,6 @@
-from functions import typing, output_pdf
+from functions import typing, spreadsheet
 import datetime
 import time
-
 
 now = datetime.datetime.now()
 
@@ -39,7 +38,7 @@ class Aircraft:
     Creates an instance of an Aircraft
     """
     def __init__(self, model, maxPax, pax, traffic_load, maxFuel,
-                 fuel, cargo, eWeight, tow, mtow):
+                 fuel, cargo, eWeight, zfw, tow, mtow):
         self.model = model
         self.maxPax = int(maxPax)
         self.pax = int(pax)
@@ -50,6 +49,7 @@ class Aircraft:
         self.eWeight = int(eWeight)
         self.tow = int(tow)
         self.mtow = int(mtow)
+        self.zfw = int(zfw)
 
 
 def select_aircraft():
@@ -117,15 +117,12 @@ def fuel_quantity(aircraft):
             print(f"Maximum {aircraft.maxFuel}kg. Minimum {minFuel}kg.\n")
 
 
-def calculate_underload(aircraft, fuel, traffic_load):
+def calculate_underload(aircraft):
     """
     Calculates the useful load to the user. This indicated how much additional
     weight the aircraft can carry. i.e passengers and cargo.
     """
-    underload = (int(aircraft.mtow) -
-                 int(aircraft.eWeight) -
-                 int(aircraft.fuel) -
-                 int(traffic_load))
+    underload = int(aircraft.mtow) - int(aircraft.tow)
     return underload
 
 
@@ -184,7 +181,7 @@ def load_passengers(aircraft, pax, traffic_load):
     aircraft.traffic_load = traffic_load
 
 
-def cargo_quantity(aircraft, underload):
+def cargo_quantity(aircraft):
     """
     Asks for an input to represent the amount of cargo the user
     would like to carry.
@@ -209,17 +206,27 @@ def cargo_quantity(aircraft, underload):
             print("-----PLEASE ENTER CARGO AS A WHOLE NUMBER-----\n")
 
 
+def calculate_zfw(aircraft, traffic_load, cargo):
+    """
+    Calculate the weight of the aircraft with no fuel onboard
+    """
+    zfw = (int(aircraft.eWeight) +
+           int(aircraft.traffic_load) +
+           int(aircraft.cargo))
+    return zfw
+
+
 def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
     """
     Performs a calculation to see if the take-off
     weight it acceptable.
     """
+
     while True:
         tow = (int(aircraft.eWeight) +
                int(aircraft.traffic_load) +
                int(aircraft.cargo) +
-               int(aircraft.fuel))
-
+               int(aircraft.fuel)) 
         if tow > aircraft.mtow:
             print()
             typing(f"The take off weight is {tow}kg, "
@@ -234,7 +241,7 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
             choice = input("Please select a, b or c: \n")
 
             if choice.lower() == 'a':
-                new_cargo = cargo_quantity(aircraft, underload)
+                new_cargo = cargo_quantity(aircraft)
                 aircraft.cargo = new_cargo
             elif choice.lower() == 'b':
                 n_pax, n_traffic_load, ap, cp = passenger_quantity(aircraft)
@@ -248,6 +255,7 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
             else:
                 return tow
         else:
+            calculate_underload(aircraft)
             return tow
 
 
@@ -327,20 +335,22 @@ def main():
     fuel = fuel_quantity(aircraft)
     pax, traffic_load, adults, children = passenger_quantity(aircraft)
     load_passengers(aircraft, pax, traffic_load)
-    underload = calculate_underload(aircraft, fuel, traffic_load)
-    cargo = cargo_quantity(aircraft, underload)
+    cargo = cargo_quantity(aircraft)
+    underload = calculate_underload(aircraft)
     new_tow = check_max_weight(aircraft, traffic_load, cargo, fuel, underload)
+    zfw = calculate_zfw(aircraft, traffic_load, cargo)
     aircraft.tow = new_tow
+    aircraft.zfw = zfw
     print_loadsheet(aircraft, adults, children)
-    output_pdf(aircraft, adults, children)
+    spreadsheet(aircraft, adults, children, underload)
     another_flight()
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000',
-                 '0', '0', '183500', '183500', '396000')
+                 '0', '0', '183500', '183500', '183500', '396000')
 ejet = Aircraft('Embraer 190', '98', '0', '0', '12900', '0',
-                '0', '28000', '28000', '45990')
+                '0', '28000', '28000', '28000', '45990')
 jetstream = Aircraft('Jetstream 41', '29', '0', '0', '2700',
-                     '0', '0', '6400', '6400', '10800')
+                     '0', '0', '6400', '6400', '6400', '10800')
 
 main()

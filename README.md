@@ -5,8 +5,9 @@ It is designed to take a number of inputs from the user to narrow down the accep
 
 To try your hand planning a loadsheet please click [**here**](https://loadsheet-planner.herokuapp.com/).
 
-[YOUR LOADSHEET](https://docs.google.com/spreadsheets/d/e/2PACX-1vSDHdvBYgMN35bJo814uzVDkcJHLpVadflv9rPOiGK42BrcPKdQDhSwWnDpYNtTNQqGsC_lX5tqAhos/pubhtml
+[**View your loadsheet here**](https://docs.google.com/spreadsheets/d/11693cya7PaL2sy6IjM4S__RAFoXotdeA6I_FLQwKygI/edit#gid=0
 )
+
 ![Image of the deployed application](assets/videos/app_load.gif)
 
 # Contents
@@ -76,7 +77,7 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 4. Input the cargo quantity (in kg) that has been requested by the Airline.
 5. The Loadsheet Planner will check that the weights are all within the prescribed limits.
     If not it will give the user an option to alter some of the load.
-6. The loadsheet prints automatically on completion of the above steps. Currently it prints to the app interface.
+6. The loadsheet prints automatically on completion of the above steps. Currently it prints to the app interface and to a google spreadsheet accessible by the button at the bottom of the interface.
 7. The user is then given an option to load another flight or exit.
 
 [Back to top](<#contents>)

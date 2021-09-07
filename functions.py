@@ -1,7 +1,8 @@
 import sys
 import time
 import datetime
-from fpdf import FPDF
+import gspread
+from google.oauth2.service_account import Credentials
 
 now = datetime.datetime.now()
 
@@ -24,11 +25,12 @@ def typing(text, speed):
         time.sleep(speed)
 
 
+"""
 # http://www.fpdf.org/ Library - My template for the loadsheet creation.
 def output_pdf(aircraft, adults, children):
-    """
+
     Uses FPDF to create a pdf of the loadsheet.
-    """
+
     zfw = (int(aircraft.eWeight)
            + int(aircraft.traffic_load)
            + int(aircraft.cargo))
@@ -90,3 +92,34 @@ def output_pdf(aircraft, adults, children):
     pdf.cell(80, 20, '', 'B', 2, 'L')
     pdf.cell(-60)
     pdf.output('loadsheet.pdf')
+"""
+
+
+# The initial part of this method was inspired by the code institute love sandwiches project.
+def spreadsheet(aircraft, adults, children, underload):
+    """
+    Create the loadsheet by populating a google spreadsheet
+    """
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+        ]
+
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('loadsheet-planner')
+
+    flight = SHEET.worksheet('Current-Flight')
+    flight.update('A1', (f'Loadsheet generated for {aircraft.model}'
+                  f' on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}'))
+    flight.update('B2', adults + ' Adults' + ', ' + children + ' Children')
+    flight.update('B3', aircraft.eWeight)
+    flight.update('B4', aircraft.traffic_load)
+    flight.update('B5', aircraft.cargo)
+    flight.update('B6', aircraft.zfw)
+    flight.update('B7', aircraft.fuel)
+    flight.update('E7', aircraft.maxFuel)
+    flight.update('B8', aircraft.tow)
+    flight.update('B10', aircraft.mtow)

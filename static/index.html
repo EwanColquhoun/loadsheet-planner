@@ -13,8 +13,10 @@
 <body>
     <button onclick="window.location.reload()">Run Loadsheet Planner</button>
     <div id="terminal"></div>
-    <a href:"https://docs.google.com/spreadsheets/d/11693cya7PaL2sy6IjM4S__RAFoXotdeA6I_FLQwKygI/edit?usp=sharing"
-        target="_blank">View your loadsheet</a>
+    <form action="https://docs.google.com/spreadsheets/d/11693cya7PaL2sy6IjM4S__RAFoXotdeA6I_FLQwKygI/edit?usp=sharing"
+        method="get" target="_blank">
+        <button type="submit">View your loadsheet here...</button>
+    </form>
     <script>
         var socket = null;
         var term = null;

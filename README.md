@@ -5,6 +5,8 @@ It is designed to take a number of inputs from the user to narrow down the accep
 
 To try your hand planning a loadsheet please click [**here**](https://loadsheet-planner.herokuapp.com/).
 
+[YOUR LOADSHEET](https://docs.google.com/spreadsheets/d/e/2PACX-1vSDHdvBYgMN35bJo814uzVDkcJHLpVadflv9rPOiGK42BrcPKdQDhSwWnDpYNtTNQqGsC_lX5tqAhos/pubhtml
+)
 ![Image of the deployed application](assets/videos/app_load.gif)
 
 # Contents

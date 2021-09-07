@@ -172,7 +172,8 @@
     text-decoration: underline;
 }
 
-button {
+button,
+a {
     width: 200px;
     height: 40px;
     background-color: #E84610;

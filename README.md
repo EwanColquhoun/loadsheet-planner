@@ -3,9 +3,9 @@
 The Loadsheet planner application is designed for use by an airline dispatcher to quickly calculate the acceptable loads whilst preparing an aircraft for dispatch. <br>
 It is designed to take a number of inputs from the user to narrow down the acceptable fuel, passenger and cargo loads available to them. For the purpose of this application the fuel, passenger and cargo loads would have already been passed to the user from the Airline and Flight Crew.
 
-To try your hand planning a loadsheet please click [**here**](https://loadsheet-planner.herokuapp.com/).
+To try your hand planning a loadsheet please click [**here.**](https://loadsheet-planner.herokuapp.com/)
 
-[**View your loadsheet here**](https://docs.google.com/spreadsheets/d/e/2PACX-1vSDHdvBYgMN35bJo814uzVDkcJHLpVadflv9rPOiGK42BrcPKdQDhSwWnDpYNtTNQqGsC_lX5tqAhos/pubhtml?gid=0&single=true
+View a sample loadsheet [**here.**](https://docs.google.com/spreadsheets/d/e/2PACX-1vSDHdvBYgMN35bJo814uzVDkcJHLpVadflv9rPOiGK42BrcPKdQDhSwWnDpYNtTNQqGsC_lX5tqAhos/pubhtml?gid=0&single=true
 )
 
 ![Image of the deployed application](assets/videos/app_load.gif)
@@ -52,9 +52,15 @@ To try your hand planning a loadsheet please click [**here**](https://loadsheet-
 [Back to top](<#contents>)
 ## Definitions
 * Aircraft - 
-    * Boeing 747-400 [![B747 image](assets/images/b747.jpg)](https://en.wikipedia.org/wiki/Boeing_747-400)
-    * Embraer 190 [![E190 image](assets/images/e190.png)](https://en.wikipedia.org/wiki/Embraer_E-Jet_family)
-    * Jetstream 41 [![J41 image](assets/images/j41.jpg)](https://en.wikipedia.org/wiki/British_Aerospace_Jetstream_41)
+    * Boeing 747-400 
+
+    [![B747 image](assets/images/b747.jpg)](https://en.wikipedia.org/wiki/Boeing_747-400)
+    * Embraer 190 
+    
+    [![E190 image](assets/images/e190.png)](https://en.wikipedia.org/wiki/Embraer_E-Jet_family)
+    * Jetstream 41 
+    
+    [![J41 image](assets/images/j41.jpg)](https://en.wikipedia.org/wiki/British_Aerospace_Jetstream_41)
 
 * Terminology - 
     * [**Loadsheet**](https://www.linkedin.com/pulse/aircraft-loadsheet-peter-irungu/) - Provides the crew with the various weights that are crucial for the flight. Compiled with information from the airline (passenger and cargo figures) and the crew themselves (fuel, aircraft specific weights).
@@ -143,7 +149,7 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 
 [Back to top](<#contents>)
 ## Future Features
-* The loadsheet displaying on the browser screen. Within the confines of the CI template this feature isn't easily possible. For this release the loadsheet is stored as a pdf in the workspace after it is printed to the screen. Currently not accessible by the user. eg; [Loadsheet](loadsheet.pdf).
+* Setting the application up to take 'real' aircraft data to enable real world use. It would involve a variation on the classes concept and a few more inputs relating to fuel and passenger weights. 
 
 [Back to top](<#contents>)
 # Technologies Used
@@ -156,6 +162,8 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 * [FPDF](http://www.fpdf.org/) - Python library used to generate pdfs (loadsheet in this case).
 * [PEP8](http://pep8online.com/) - for testing and validating the code.
 * [Google Sheets](https://www.google.co.uk/sheets/about/) - to create the printable spreadsheet.
+* [Google Cloud](https://cloud.google.com/) - to create a project for the API.
+* [Google Sheets API](https://developers.google.com/sheets/api) - an API to link the Loadsheet planner with Google Sheets.
 
 [Back to top](<#contents>)
 # Testing
@@ -220,7 +228,9 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 1. Navigate to "Settings" and scroll down to "build packs".
 2. Click "build packs" and then click both "python" and "node.js"(node.js is needed for the Code Institute mock terminal.)
 3. Ensure that the python buildpack is above the node.js buildpack, You can click and drag the packs to re-arrange them.
+4. (Optional) - To use the Loadsheet Planner to print a loadsheet to Google Sheets a google account will need to be linked to the google cloud. To ensure a secure connection with the cloud you will need to activate a security key in the form of a .json file. This file is specific to your setup and the key can be created within a google cloud project to allow access to the google sheets API controlling the specific google Sheet. Once you have a .json authentication file you can add it into the 'CONFIG VARS' section of Heroku. The CONFIG VARS gives a key and value section. Add CREDS as the key and the contents of your .json file as the value and click 'add'.
 ![Heroku Buildpack](assets/images/buildpacks.png)
+![Config Vars](assets/images/config-vars.png)
 
 ### App Deployment
 
@@ -250,13 +260,11 @@ The method for cloning a project from GitHub is below:
 4. Change the current working directory to the location where you want the cloned directory to be made.
 5. Type **git clone**, and then paste the URL copied from GitHub.
 6. Press **enter** and the local clone will be created.
-7. To install the project libraries enter the following commands into your IDE terminal:
-> pip3 install fpdf
-
-> pip3 install fpdf2 
-
+7. To install the project library (GSPREAD) enter the following command into your IDE virtual environment terminal:
+> pip3 install gspread
 8. To run the application from your IDE you need to run the 'run.py' file in a server. To do this in GitPod you enter the following into the terminal:
 > python3 run.py
+9. (Optional) To run the Loadsheet planner without the google sheets implimentation you need to just remove the call for the 'spreadsheet()' function from the 'main()' function.
 
 [Back to top](<#contents>)
 # Credits

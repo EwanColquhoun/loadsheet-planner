@@ -226,7 +226,7 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
         tow = (int(aircraft.eWeight) +
                int(aircraft.traffic_load) +
                int(aircraft.cargo) +
-               int(aircraft.fuel)) 
+               int(aircraft.fuel))
         if tow > aircraft.mtow:
             print()
             typing(f"The take off weight is {tow}kg, "
@@ -298,6 +298,8 @@ def print_loadsheet(aircraft, adults, children):
     print('-' * 78)
     print('To view your loadsheet in printable format please click')
     print(' the "View loadsheet here" button below.')
+    print()
+    print('You may need to refresh the printed loadsheet tab.')
     print()
 
 

@@ -44,7 +44,8 @@ def spreadsheet(aircraft, adults, children, underload):
 
     flight = SHEET.worksheet('Current-Flight')
     flight.update('B1', (f'Loadsheet generated for {aircraft.model}'
-                  f' on {now.strftime("%Y-%m-%d")} at {now.strftime("%H:%M:%S")}'))
+                         f' on {now.strftime("%Y-%m-%d")}'
+                         f' at {now.strftime("%H:%M:%S")}'))
     flight.update('C2', adults + ' Adults' + ', ' + children + ' Children')
     flight.update('C3', aircraft.eWeight)
     flight.update('C4', aircraft.traffic_load)

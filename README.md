@@ -143,8 +143,9 @@ creates an instance of the aircraft chosen. The respective loading figures are t
     ![Underload Image](assets/images/high-tow.png)</details>
 
 * **Print Loadsheet** <details><summary>Screenshots</summary>
-    Prints the compiled loadsheet to the application interface and gives the user the option to load another flight or exit. <br>
-    ![Printed loadsheet](assets/images/printing-loadsheet.png)</details>
+    Prints the compiled loadsheet to the application interface and gives the user the option to load another flight or exit. Also shows the buttons for opening the Loadsheet in a new tab.<br>
+    ![Printed loadsheet](assets/images/printing-loadsheet.png)
+    ![Print button](assets/images/print-button.png)</details>
 
 
 [Back to top](<#contents>)
@@ -159,7 +160,6 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 * [Lucid Charts](https://www.lucidchart.com/) - to create the flow diagram.
 * [OBS Studio](https://obsproject.com/) - to record the screen for the gif.
 * [ezgif](https://ezgif.com/) - to create the gif for the top of the readme file.
-* [FPDF](http://www.fpdf.org/) - Python library used to generate pdfs (loadsheet in this case).
 * [PEP8](http://pep8online.com/) - for testing and validating the code.
 * [Google Sheets](https://www.google.co.uk/sheets/about/) - to create the printable spreadsheet.
 * [Google Cloud](https://cloud.google.com/) - to create a project for the API.
@@ -169,6 +169,7 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 # Testing
 Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html). To ensure compliance with the current published PEP8 requirements the 'errors' with the line breaks have been rectified. The code passes PEP8 with no errors.
 ![PEP8 results image](assets/images/pep8.png)
+![PEP8 pass](assets/images/pep8-pass.png)
 [Back to top](<#contents>)
 ## Bugs
 ### Resolved bugs

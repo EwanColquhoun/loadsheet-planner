@@ -163,7 +163,10 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 * [PEP8](http://pep8online.com/) - for testing and validating the code.
 * [Google Sheets](https://www.google.co.uk/sheets/about/) - to create the printable spreadsheet.
 * [Google Cloud](https://cloud.google.com/) - to create a project for the API.
-* [Google Sheets API](https://developers.google.com/sheets/api) - an API to link the Loadsheet planner with Google Sheets.
+* [gspread](https://developers.google.com/sheets/api) - an API to link the Loadsheet planner with Google Sheets.
+
+### Libraries Used
+* Loadsheet planner uses some basic libraries, sys, time, datetime and gspread. All except gspread are contained within python itself. The sys and time libraries are used in the typing function to produce a typing effect onto the terminal. The datetime library is used to produce a time stamp for the loadsheet. The gspread library needs to be installed into your IDE (process described in the [Deployment](<#deployment>) section.). Gspread allows communication with Google Sheets, it is a Python API for Google Sheets.
 
 [Back to top](<#contents>)
 # Testing

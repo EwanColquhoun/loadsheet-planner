@@ -66,12 +66,4 @@ def clearSpreadsheet(flight):
     flight.update('B1', (f'No aircraft loaded'
                          f' on {now.strftime("%Y-%m-%d")}'
                          f' at {now.strftime("%H:%M:%S")}'))
-    flight.update('C2', '0' + ' Adults' + ', ' + '0' + ' Children')
-    flight.update('C3', '0')
-    flight.update('C4', '0')
-    flight.update('C5', '0')
-    flight.update('C6', '0')
-    flight.update('C7', '0')
-    flight.update('F7', '0')
-    flight.update('C8', '0')
-    flight.update('C10', '0')
+    flight.batch_clear(["C2:C8", "F7", "C10"])

@@ -168,12 +168,17 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 [Back to top](<#contents>)
 # Testing
 Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html). To ensure compliance with the current published PEP8 requirements the 'errors' with the line breaks have been rectified. The code passes PEP8 with no errors.
+
+* Errors -
 ![PEP8 results image](assets/images/pep8.png)
+
+* No Errors -
 ![PEP8 pass](assets/images/pep8-pass.png)
+
 [Back to top](<#contents>)
 ## Bugs
 ### Resolved bugs
-* In the check_max_weight function, there is a call for the passenger_quantity function. The passenger_quantity function returns a tuple of 4 values. When called within the parent function the last two values of the tuple aren't used. This was throwing an 'unused variable' error. To get around this both variables were assigned the value of 0.
+* In the check_max_weight function, there is a call for the passenger_quantity function. The passenger_quantity function returns a tuple of 4 values. When called within the parent function the last two values of the tuple aren't used. This was throwing an 'unused variable' error. To get around this both variables were named with the '_' character. This is recognised in python as a means to denote an unused variable.
 
 ![Resolved image](assets/images/resolved.png)
 

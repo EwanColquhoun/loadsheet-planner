@@ -244,11 +244,9 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
                 new_cargo = cargo_quantity(aircraft)
                 aircraft.cargo = new_cargo
             elif choice.lower() == 'b':
-                n_pax, n_traffic_load, ap, cp = passenger_quantity(aircraft)
+                n_pax, n_traffic_load, _, _ = passenger_quantity(aircraft)
                 aircraft.pax = n_pax
                 aircraft.traffic_load = n_traffic_load
-                ap == 0
-                cp == 0
             elif choice.lower() == 'c':
                 new_fuel = fuel_quantity(aircraft)
                 aircraft.fuel = new_fuel
@@ -335,7 +333,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()  
+    opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     pax, traffic_load, adults, children = passenger_quantity(aircraft)

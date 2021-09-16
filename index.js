@@ -7,7 +7,7 @@ var static_serve = new(static.Server)('./static');
 
 const server = http.createServer(function (req, res) {
     static_serve.serve(req, res);
-})
+});
 
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {

@@ -9,7 +9,7 @@ def opening_text():
     """
     Displays the opening text. Displays what aircraft are available to select.
     """
-    typing("        Welcome to the Loadsheet Planner\n", 0.02)
+    print("        Welcome to the Loadsheet Planner\n")
     print()
     typing("Retrieving the Aircraft database....\n", 0.02)
     print()
@@ -332,8 +332,8 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    clearSpreadsheet(flight)
     opening_text()
+    clearSpreadsheet(flight)
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     pax, traffic_load, adults, children = passenger_quantity(aircraft)

@@ -43,7 +43,8 @@ def typing(text, speed):
 
 def spreadsheet(flight, aircraft, adults, children, underload):
     """
-    Create the loadsheet by populating a google spreadsheet.
+    Create the loadsheet by populating a google spreadsheet
+    via the gspread API.
     """
     flight.update('B1', (f'Loadsheet generated for {aircraft.model}'
                          f' on {now.strftime("%Y-%m-%d")}'
@@ -61,7 +62,7 @@ def spreadsheet(flight, aircraft, adults, children, underload):
 
 def clearSpreadsheet(flight):
     """
-    Clears the loadsheet after use.
+    Clears the loadsheet when called.
     """
     flight.update('B1', (f'No aircraft loaded'
                          f' on {now.strftime("%Y-%m-%d")}'

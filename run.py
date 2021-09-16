@@ -35,7 +35,7 @@ def opening_text():
 
 class Aircraft:
     """
-    Creates an instance of an Aircraft
+    Creates an instance of an Aircraft.
     """
     def __init__(self, model, maxPax, pax, traffic_load, maxFuel,
                  fuel, cargo, eWeight, zfw, tow, mtow):
@@ -174,8 +174,7 @@ def passenger_quantity(aircraft):
 
 def load_passengers(aircraft, pax, traffic_load):
     """
-     Calculates the passenger weight then adds
-    the number of passengers to the instance of Aircraft.
+    Adds passengers and traffic-load to the instance of Aircraft.
     """
     aircraft.pax = pax
     aircraft.traffic_load = traffic_load
@@ -208,7 +207,7 @@ def cargo_quantity(aircraft):
 
 def calculate_zfw(aircraft, traffic_load, cargo):
     """
-    Calculate the weight of the aircraft with no fuel onboard
+    Calculate the weight of the aircraft with no fuel onboard.
     """
     zfw = (int(aircraft.eWeight) +
            int(aircraft.traffic_load) +
@@ -259,7 +258,7 @@ def check_max_weight(aircraft, traffic_load, cargo, fuel, underload):
 
 def print_loadsheet(aircraft, adults, children):
     """
-    Function called once all inputs and data are compiled and validated.
+    Function called once all inputs and data have been compiled and validated.
     Prints results.
     """
     zfw = (int(aircraft.eWeight) +
@@ -304,7 +303,6 @@ def print_loadsheet(aircraft, adults, children):
 def another_flight(flight):
     """
     Function gives the user to start the application again for another flight.
-    If yes, clear function called to clear the console before the next flight.
     """
     next_flight = input("Do you wish to load another flight? Y or N\n")
     if next_flight.lower() == 'y':

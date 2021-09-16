@@ -24,6 +24,7 @@ View a sample loadsheet [**here.**](https://docs.google.com/spreadsheets/d/e/2PA
     * [Existing Features](<#existing-features>)
     * [Future Features](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
+    * [Libraries Used](<#libraries-used>)
 * [**Testing**](<#testing>)
     * [Bugs](<#bugs>)
     * [Testing User Stories](<#testing-user-stories>)
@@ -131,9 +132,8 @@ creates an instance of the aircraft chosen. The respective loading figures are t
     ![Pax error image](assets/images/pax-error.png)</details>
 
 * **Cargo input** <details><summary>Screenshots</summary>
-
     Initial cargo input <br>
-    <img src="assets/images/cargo-input.png" alt="Cargo input image">
+    ![Initial Cargo](assets/images/cargo-input.png)
 
     Incorrect input character <br>
     ![Incorrect cargo](assets/images/cargo-error.png)</details>
@@ -147,6 +147,13 @@ creates an instance of the aircraft chosen. The respective loading figures are t
     ![Printed loadsheet](assets/images/printing-loadsheet.png)
     ![Print button](assets/images/print-button.png)</details>
 
+* **Loadsheet** <details><summary>Screenshots</summary>
+    The loadsheet when viewed in the browesr via the 'View Loadsheet Here' button.
+    Empty loadsheet before running the Loadsheet Planner <br>
+    ![Blank-loadsheet](assets/images/blank-loadsheet.png)
+
+    A completed loadsheet <br>
+    ![Full-loadsheet](assets/images/full-loadsheet.png)</details>
 
 [Back to top](<#contents>)
 ## Future Features
@@ -165,8 +172,8 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 * [Google Cloud](https://cloud.google.com/) - to create a project for the API.
 * [gspread](https://developers.google.com/sheets/api) - an API to link the Loadsheet planner with Google Sheets.
 
-### Libraries Used
-* Loadsheet planner uses some basic libraries, sys, time, datetime and gspread. All except gspread are contained within python itself. The sys and time libraries are used in the typing function to produce a typing effect onto the terminal. The datetime library is used to produce a time stamp for the loadsheet. The gspread library needs to be installed into your IDE (process described in the [Deployment](<#deployment>) section.). Gspread allows communication with Google Sheets, it is a Python API for Google Sheets.
+## Libraries Used
+Loadsheet planner uses some basic libraries, sys, time, datetime and gspread. All except gspread are contained within python itself. The sys and time libraries are used in the typing function to produce a typing effect onto the terminal. The datetime library is used to produce a time stamp for the loadsheet. The gspread library needs to be installed into your IDE (process described in the [Deployment-Clone](<#to-create-a-local-clone-of-this-project>) section.). Gspread allows communication with Google Sheets, it is a Python API for Google Sheets.
 
 [Back to top](<#contents>)
 # Testing

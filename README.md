@@ -65,11 +65,11 @@ To try your hand planning a loadsheet please click [**here.**](https://loadsheet
     * [**Aircraft Dispatcher**](https://www.myworldofwork.co.uk/my-career-options/job-profiles/flight-dispatcher) - Provides the Pilots with the weight and balance information relevant to the flight. Also acts as the liaison between the Pilots and the loading staff.
     * **Flight crew** - In this case Pilots, could include loadmaster and navigatior if carried.
     * **Basic Weight** (eWeight in this app) - The weight of the aircraft without passengers, baggage or usable fuel.
-    * **Traffic load** - For this app it is the mass of the passengers and bags. Often      cargo mass is also included in this definition.
+    * **Traffic load** - For this app it is the mass of the passengers and bags. Often cargo mass is also included in this definition.
     * **Cargo** - For this app it is the mass of cargo (could be baggage, animals, cars, ppe etc) that is in the aircraft hold (under the passengers).
     * **Zero Fuel weight (ZFW)** - The weight of the loaded aircraft without the fuel.
     * **Take off weight (TOW)** - The weight of the aircraft at take off. It is comprised off the Basic weight, traffic load and fuel. 
-    * **Maximum take off weight (MTOW)** - The maximum weight the pilot is permitted to attempt to take off. Can be reduced for performance requirements (not functional in this app version).
+    * **Maximum take off weight (MTOW)** - The maximum weight of the aircraft that the pilot is permitted to attempt a take off. Can be reduced for performance requirements (not functional in this app version).
     * **Underload** - The difference between the MTOW and the TOW.
 
 [Back to top](<#contents>)
@@ -81,7 +81,7 @@ To try your hand planning a loadsheet please click [**here.**](https://loadsheet
 4. Input the cargo quantity (in kg) that has been requested by the Airline.
 5. The Loadsheet Planner will check that the weights are all within the prescribed limits.
     If not it will give the user an option to alter some of the load.
-6. The loadsheet prints automatically on completion of the above steps. Currently it prints to the app interface and to a google spreadsheet accessible by the button at the bottom of the interface.
+6. The loadsheet prints automatically on completion of the above steps. It prints to the app interface and to a google spreadsheet accessible by the button at the bottom of the interface.
 7. The user is then given an option to load another flight or exit.
 
 [Back to top](<#contents>)
@@ -93,8 +93,7 @@ To try your hand planning a loadsheet please click [**here.**](https://loadsheet
 
 [Back to top](<#contents>)
 ## Class model
-The application is based on python classes. The return value from the select_aircraft function
-creates an instance of the aircraft chosen. The respective loading figures are then populated into that instance to 'create' the loaded aircraft.
+The application is based on python classes. The return value from the select_aircraft function creates an instance of the aircraft chosen. The respective loading figures are then populated into that instance to 'create' the loaded aircraft.
 ![Class model image](assets/images/aircraft-class.png)
 
 [Back to top](<#contents>)
@@ -145,11 +144,11 @@ creates an instance of the aircraft chosen. The respective loading figures are t
     ![Print button](assets/images/print-button.png)</details>
 
 * **Loadsheet** <details><summary>Screenshots</summary>
-    The loadsheet when viewed in the browesr via the 'View Loadsheet Here' button.
-    Empty loadsheet before running the Loadsheet Planner <br>
+    The loadsheet can be viewed in the browser via the 'View Loadsheet Here' button.<br>
+    Empty loadsheet before running the Loadsheet Planner - <br>
     ![Blank-loadsheet](assets/images/blank-loadsheet.png)
 
-    A completed loadsheet <br>
+    A completed loadsheet - <br>
     ![Full-loadsheet](assets/images/full-loadsheet.png)</details>
 
 [Back to top](<#contents>)
@@ -170,11 +169,11 @@ creates an instance of the aircraft chosen. The respective loading figures are t
 * [gspread](https://developers.google.com/sheets/api) - an API to link the Loadsheet planner with Google Sheets.
 
 ## Libraries Used
-Loadsheet planner uses some basic libraries, sys, time, datetime and gspread. All except gspread are contained within python itself. The sys and time libraries are used in the typing function to produce a typing effect onto the terminal. The datetime library is used to produce a time stamp for the loadsheet. The gspread library needs to be installed into your IDE (process described in the [Deployment-Clone](<#to-create-a-local-clone-of-this-project>) section.). Gspread allows communication with Google Sheets, it is a Python API for Google Sheets.
+Loadsheet planner uses some basic libraries, sys, time, datetime and gspread. All except gspread are contained within python itself. The sys and time libraries are used in the typing function to produce a typing effect onto the terminal. The datetime library is used to produce a time stamp for the loadsheet. The gspread library needs to be installed into your IDE (process described in the [Deployment-Clone](<#to-create-a-local-clone-of-this-project>) section). Gspread allows communication with Google Sheets, it is a Python API for Google Sheets.
 
 [Back to top](<#contents>)
 # Testing
-Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html). To ensure compliance with the current published PEP8 requirements the 'errors' with the line breaks have been rectified. The code passes PEP8 with no errors.
+Testing of the code revealed that in both '.py' files the line breaks (due to line length) involving an operator were inaccurate. The current best practice (post 2016) is to line break before an operator so that all the operators are in line. This is easier to read than breaking the line after the operator. Reference [flake8rules](https://www.flake8rules.com/rules/W503.html). To ensure compliance with the current (2021) published PEP8 requirements the 'errors' with the line breaks have been rectified. The code passes PEP8 with no errors.
 
 * Errors -
 ![PEP8 results image](assets/images/pep8.png)
@@ -200,20 +199,20 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 * As a user I want to input data to create a loadsheet.
     * There are many input features for the user, **aircraft choice, fuel, passenger quantity** and **cargo quantity.**
 * As a user I want to select which aircraft I am loading.
-    * The **first input** in the Loadsheet Planner is to choose which aircraft you will load. This is a vital step as each aircraft is suited to a particular type of flying eg, domestic, long-haul and cargo.
+    * The **aircraft input** in the Loadsheet Planner enables the user to choose which aircraft you will load. This is a vital step as each aircraft is suited to a particular type of flying eg, domestic, long-haul and cargo.
 * As a user I want to input the fuel load.
     * After choosing your aircraft the next input is for **fuel quantity.**
 * As a user I want to input the requested Passenger numbers.
     * After the fuel input the next is **passenger quantity** with both adult and children options.
 * As a user I want to input the amount of cargo.
-    * If there is **sufficient weight left (underload)** the option to **load cargo** will follow the passenger quantity input. If the user wanted to operate a cargo only flight they would simply enter '0' passengers.
+    * The **load cargo** input follows the passenger quantity input. If the user wanted to operate a cargo only flight they would simply enter '0' passengers.
 * As a user I want to know that my inputs are correct.
     * After each input the user is informed that their choice or **selection is valid**. If not, it flags an error and the user is infomred how to correct it.
 
 ### Owner Stories
 
 * As an owner I want to ensure the data entered is correct and valid.
-    * There is **validation** built into the Loadsheet Planner. It checks that each input is within a set range and returns an error to the user if incorrect.
+    * There is **validation** built into the Loadsheet Planner. It checks that each input is within a set range and returns an error to the user if incorrect. The Loadsheet Planner also checks that the final loaded aircraft is within the correct weight ranges, providing a further validation to the user and owner.
 * As an owner I want to ensure the loadsheet is useable by those detached from the input process.
     * When the loadsheet is **printed** it has all the relevant information on it in a clear and consise manor. This layout minimises the risk of misinterpretation of data. All the user would need to do is print the loadsheet and hand it to the Flight Crew. They would then extract the data they need for the flight.
 

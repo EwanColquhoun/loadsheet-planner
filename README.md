@@ -35,7 +35,7 @@ To try your hand planning a loadsheet please click [**here.**](https://loadsheet
 
 ## User Stories
 
-* As a user I want to input data to creata a loadsheet.
+* As a user I want to input data to create a loadsheet.
 * As a user I want to select which aircraft I am loading.
 * As a user I want to input the fuel load.
 * As a user I want to input the requested Passenger numbers.
@@ -207,7 +207,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 * As a user I want to input the amount of cargo.
     * The **load cargo** input follows the passenger quantity input. If the user wanted to operate a cargo only flight they would simply enter '0' passengers.
 * As a user I want to know that my inputs are correct.
-    * After each input the user is informed that their choice or **selection is valid**. If not, it flags an error and the user is infomred how to correct it.
+    * After each input the user is informed that their choice or **selection is valid**. If not, it flags an error and the user is informed how to correct it.
 
 ### Owner Stories
 

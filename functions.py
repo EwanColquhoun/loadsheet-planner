@@ -45,7 +45,6 @@ def spreadsheet(flight, aircraft, adults, children, underload):
     """
     Create the loadsheet by populating a google spreadsheet.
     """
-
     flight.update('B1', (f'Loadsheet generated for {aircraft.model}'
                          f' on {now.strftime("%Y-%m-%d")}'
                          f' at {now.strftime("%H:%M:%S")}'))
@@ -64,7 +63,6 @@ def clearSpreadsheet(flight):
     """
     Clears the loadsheet after use.
     """
-
     flight.update('B1', (f'No aircraft loaded'
                          f' on {now.strftime("%Y-%m-%d")}'
                          f' at {now.strftime("%H:%M:%S")}'))

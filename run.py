@@ -307,7 +307,6 @@ def another_flight(flight):
     If yes, clear function called to clear the console before the next flight.
     """
     next_flight = input("Do you wish to load another flight? Y or N\n")
-    clearSpreadsheet(flight)
     if next_flight.lower() == 'y':
         main()
         return
@@ -333,6 +332,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
+    clearSpreadsheet(flight)
     opening_text()
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)

@@ -1,4 +1,4 @@
-from functions import typing, spreadsheet
+from functions import typing, spreadsheet, clearSpreadsheet, flight
 import datetime
 import time
 
@@ -303,13 +303,13 @@ def print_loadsheet(aircraft, adults, children):
     print()
 
 
-def another_flight():
+def another_flight(flight):
     """
     Function gives the user to start the application again for another flight.
     If yes, clear function called to clear the console before the next flight.
     """
     next_flight = input("Do you wish to load another flight? Y or N\n")
-
+    clearSpreadsheet(flight)
     if next_flight.lower() == 'y':
         main()
         return
@@ -335,7 +335,7 @@ def main():
     """
     Runs the application on loading the browser.
     """
-    opening_text()
+    opening_text()  
     aircraft = select_aircraft()
     fuel = fuel_quantity(aircraft)
     pax, traffic_load, adults, children = passenger_quantity(aircraft)
@@ -347,8 +347,8 @@ def main():
     aircraft.tow = new_tow
     aircraft.zfw = zfw
     print_loadsheet(aircraft, adults, children)
-    spreadsheet(aircraft, adults, children, underload)
-    another_flight()
+    spreadsheet(flight, aircraft, adults, children, underload)
+    another_flight(flight)
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000',

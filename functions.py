@@ -7,6 +7,22 @@ from google.oauth2.service_account import Credentials
 now = datetime.datetime.now()
 
 
+# The variables below were inspired by the
+# code institute love sandwiches project.
+SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+        ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('loadsheet-planner')
+
+flight = SHEET.worksheet('Current-Flight')
+
+
 # Code Credit - Help with the typing() function was found here:
 # https://stackoverflow.com/questions/4627033/printing-a-string-with-a-little-delay-between-the-chars
 def typing(text, speed):
@@ -25,24 +41,11 @@ def typing(text, speed):
         time.sleep(speed)
 
 
-# The initial part of this method was inspired by the
-# code institute love sandwiches project.
-def spreadsheet(aircraft, adults, children, underload):
+def spreadsheet(flight, aircraft, adults, children, underload):
     """
-    Create the loadsheet by populating a google spreadsheet
+    Create the loadsheet by populating a google spreadsheet.
     """
-    SCOPE = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive.file",
-        "https://www.googleapis.com/auth/drive"
-        ]
 
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SHEET = GSPREAD_CLIENT.open('loadsheet-planner')
-
-    flight = SHEET.worksheet('Current-Flight')
     flight.update('B1', (f'Loadsheet generated for {aircraft.model}'
                          f' on {now.strftime("%Y-%m-%d")}'
                          f' at {now.strftime("%H:%M:%S")}'))
@@ -55,3 +58,22 @@ def spreadsheet(aircraft, adults, children, underload):
     flight.update('F7', aircraft.maxFuel)
     flight.update('C8', aircraft.tow)
     flight.update('C10', aircraft.mtow)
+
+
+def clearSpreadsheet(flight):
+    """
+    Clears the loadsheet after use.
+    """
+
+    flight.update('B1', (f'No aircraft loaded'
+                         f' on {now.strftime("%Y-%m-%d")}'
+                         f' at {now.strftime("%H:%M:%S")}'))
+    flight.update('C2', '0' + ' Adults' + ', ' + '0' + ' Children')
+    flight.update('C3', '0')
+    flight.update('C4', '0')
+    flight.update('C5', '0')
+    flight.update('C6', '0')
+    flight.update('C7', '0')
+    flight.update('F7', '0')
+    flight.update('C8', '0')
+    flight.update('C10', '0')

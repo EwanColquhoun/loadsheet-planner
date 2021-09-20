@@ -300,7 +300,7 @@ def print_loadsheet(aircraft, adults, children):
     print()
 
 
-def another_flight(flight):
+def another_flight():
     """
     Function gives the user to start the application again for another flight.
     """
@@ -344,7 +344,7 @@ def main():
     aircraft.zfw = zfw
     print_loadsheet(aircraft, adults, children)
     spreadsheet(flight, aircraft, adults, children, underload)
-    another_flight(flight)
+    another_flight()
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000',

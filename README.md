@@ -239,8 +239,8 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
         
         Correct input (fuel shown for example)<br>
         ![Correct fuel input](assets/images/fuel-valid.png)
+        
          Incorrect input character - Input is not a number. <br>
-
         ![Incorrect fuel input images](assets/images/nan-fuel.png)
         ![Pax error image](assets/images/pax-error.png)
         ![Incorrect cargo](assets/images/cargo-error.png)

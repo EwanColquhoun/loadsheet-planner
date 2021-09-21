@@ -190,6 +190,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 
 ### Unresolved bugs
 * There is a bug with the 'typing' function and the Code Institute mock terminal interface. At the time of writing it didn't show the animation of the typing effect correctly.
+* Currently the loadsheet doesn't load in real time, there is a slight delay whilst google sheets updates the data. To get around this there is a message in the application suggesting that the user may need to reload the loadsheet tab if the data displayed isn't what they have submitted. This would be correcting in an application update.
 
 [Back to top](<#contents>)
 ## Testing User stories
@@ -272,7 +273,7 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
     * When the loadsheet is **printed** it has all the relevant information on it in a clear and consise manor. This layout minimises the risk of misinterpretation of data. All the user would need to do is print the loadsheet and hand it to the Flight Crew. They would then extract the data they need for the flight.
         <details><summary>Loadsheet</summary>
         A blank loadsheet<br>
-        
+
         ![Blank-loadsheet](assets/images/blank-loadsheet.png)
 
         A completed loadsheet<br>

@@ -237,6 +237,8 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
     * After each input the user is informed that their choice or **selection is valid**. If not, it flags an error and the user is informed how to correct it.
         <details><summary>Validation</summary>
         
+        Correct input (fuel shown for example)<br>
+        ![Correct fuel input](assets/images/fuel-valid.png)
          Incorrect input character - Input is not a number. <br>
 
         ![Incorrect fuel input images](assets/images/nan-fuel.png)
@@ -256,6 +258,9 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 * As an owner I want to ensure the data entered is correct and valid.
     * There is **validation** built into the Loadsheet Planner. It checks that each input is within a set range and returns an error to the user if incorrect. The Loadsheet Planner also checks that the final loaded aircraft is within the correct weight ranges, providing a further validation to the user and owner.
        <details><summary>Validation</summary>
+        Correct input (fuel shown for example)<br>
+        
+        ![Correct fuel input](assets/images/fuel-valid.png)
         
          Incorrect input character - Input is not a number. <br>
 

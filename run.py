@@ -300,13 +300,13 @@ def print_loadsheet(aircraft, adults, children):
     print()
 
 
-def another_flight():
+def another_flight(flight):
     """
     Function gives the user to start the application again for another flight.
     """
     next_flight = input("Do you wish to load another flight? Y or N\n")
     if next_flight.lower() == 'y':
-        main()
+        main(flight)
         return
     elif next_flight.lower() == 'n':
         time.sleep(1)
@@ -323,10 +323,10 @@ def another_flight():
         print('Please enter Y to load another flight or'
               ' N to exit the application')
         print()
-        another_flight()
+        another_flight(flight)
 
 
-def main():
+def main(flight):
     """
     Runs the application on loading the browser.
     """
@@ -344,7 +344,7 @@ def main():
     aircraft.zfw = zfw
     print_loadsheet(aircraft, adults, children)
     spreadsheet(flight, aircraft, adults, children, underload)
-    another_flight()
+    another_flight(flight)
 
 
 jumbo = Aircraft('Boeing 747-400', '331', '0', '0', '170000',
@@ -354,4 +354,4 @@ ejet = Aircraft('Embraer 190', '98', '0', '0', '12900', '0',
 jetstream = Aircraft('Jetstream 41', '29', '0', '0', '2700',
                      '0', '0', '6400', '6400', '6400', '10800')
 
-main()
+main(flight)

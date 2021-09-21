@@ -41,6 +41,7 @@ def typing(text, speed):
         time.sleep(speed)
 
 
+# Custom code to modify the google sheet
 def spreadsheet(flight, aircraft, adults, children, underload):
     """
     Create the loadsheet by populating a google spreadsheet
@@ -60,9 +61,10 @@ def spreadsheet(flight, aircraft, adults, children, underload):
     flight.update('C10', aircraft.mtow)
 
 
+# Custom code to clear the google sheet
 def clearSpreadsheet(flight):
     """
-    Clears the loadsheet when called.
+    Clears the loadsheet of variable values when called.
     """
     flight.update('B1', (f'No aircraft loaded'
                          f' on {now.strftime("%Y-%m-%d")}'

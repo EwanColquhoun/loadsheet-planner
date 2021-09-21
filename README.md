@@ -198,23 +198,86 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
 
 * As a user I want to input data to create a loadsheet.
     * There are many input features for the user, **aircraft choice, fuel, passenger quantity** and **cargo quantity.**
+        <details><summary>Inputs</summary>
+            
+        ![Fuel input image](assets/images/fuel-input.png)
+        ![Initial Cargo](assets/images/cargo-input.png)
+        ![Passenger input image](assets/images/pax-input.png)
+        </details>
 * As a user I want to select which aircraft I am loading.
     * The **aircraft input** in the Loadsheet Planner enables the user to choose which aircraft you will load. This is a vital step as each aircraft is suited to a particular type of flying eg, domestic, long-haul and cargo.
+        <details><summary>Aircraft Choice</summary>
+            
+        ![Welcome page image](assets/images/opening-text.png)    
+        </details>
 * As a user I want to input the fuel load.
     * After choosing your aircraft the next input is for **fuel quantity.**
+        <details><summary>Fuel</summary>
+
+        ![Fuel input image](assets/images/fuel-input.png)
+        </details>
+
 * As a user I want to input the requested Passenger numbers.
     * After the fuel input the next is **passenger quantity** with both adult and children options.
+        <details><summary>Passengers</summary>
+        
+        ![Passenger input image](assets/images/pax-input.png)
+        </details>
+
 * As a user I want to input the amount of cargo.
     * The **load cargo** input follows the passenger quantity input. If the user wanted to operate a cargo only flight they would simply enter '0' passengers.
+        <details><summary>Cargo</summary>
+        
+        ![Initial Cargo](assets/images/cargo-input.png)
+        </details>
+
 * As a user I want to know that my inputs are correct.
     * After each input the user is informed that their choice or **selection is valid**. If not, it flags an error and the user is informed how to correct it.
+        <details><summary>Validation</summary>
+        
+         Incorrect input character - Input is not a number. <br>
+
+        ![Incorrect fuel input images](assets/images/nan-fuel.png)
+        ![Pax error image](assets/images/pax-error.png)
+        ![Incorrect cargo](assets/images/cargo-error.png)
+        Too many passengers <br>
+        ![Too many pax image](assets/images/high-pax.png)
+         Too much fuel<br>
+        ![High-fuel image](assets/images/high-fuel.png)
+        Not enough fuel<br>
+        ![Low fuel image](assets/images/low-fuel.png)
+        Take-off weight too high<br>
+        ![Underload Image](assets/images/high-tow.png)
 
 ### Owner Stories
 
 * As an owner I want to ensure the data entered is correct and valid.
     * There is **validation** built into the Loadsheet Planner. It checks that each input is within a set range and returns an error to the user if incorrect. The Loadsheet Planner also checks that the final loaded aircraft is within the correct weight ranges, providing a further validation to the user and owner.
+       <details><summary>Validation</summary>
+        
+         Incorrect input character - Input is not a number. <br>
+
+        ![Incorrect fuel input images](assets/images/nan-fuel.png)
+        ![Pax error image](assets/images/pax-error.png)
+        ![Incorrect cargo](assets/images/cargo-error.png)
+        Too many passengers <br>
+        ![Too many pax image](assets/images/high-pax.png)
+         Too much fuel<br>
+        ![High-fuel image](assets/images/high-fuel.png)
+        Not enough fuel<br>
+        ![Low fuel image](assets/images/low-fuel.png)
+        Take-off weight too high<br>
+        ![Underload Image](assets/images/high-tow.png)
 * As an owner I want to ensure the loadsheet is useable by those detached from the input process.
     * When the loadsheet is **printed** it has all the relevant information on it in a clear and consise manor. This layout minimises the risk of misinterpretation of data. All the user would need to do is print the loadsheet and hand it to the Flight Crew. They would then extract the data they need for the flight.
+        <details><summary>Loadsheet</summary>
+        A blank loadsheet<br>
+        
+        ![Blank-loadsheet](assets/images/blank-loadsheet.png)
+
+        A completed loadsheet<br>
+        ![Full-loadsheet](assets/images/full-loadsheet.png)</details>
+
 
 [Back to top](<#contents>)
 ## Additional testing

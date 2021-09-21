@@ -81,7 +81,7 @@ To try your hand planning a loadsheet please click [**here.**](https://loadsheet
 4. Input the cargo quantity (in kg) that has been requested by the Airline.
 5. The Loadsheet Planner will check that the weights are all within the prescribed limits.
     If not it will give the user an option to alter some of the load.
-6. The loadsheet prints automatically on completion of the above steps. It prints to the app interface and to a google spreadsheet accessible by the button at the bottom of the interface.
+6. The loadsheet prints automatically on completion of the above steps. It prints to the app interface and to a google spreadsheet accessible by the button at the bottom of the interface. (User may need to refresh the loadsheet tab, especially in-between multiple loadsheets.).
 7. The user is then given an option to load another flight or exit.
 
 [Back to top](<#contents>)
@@ -244,12 +244,16 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
         ![Incorrect fuel input images](assets/images/nan-fuel.png)
         ![Pax error image](assets/images/pax-error.png)
         ![Incorrect cargo](assets/images/cargo-error.png)
+
         Too many passengers <br>
         ![Too many pax image](assets/images/high-pax.png)
+
          Too much fuel<br>
         ![High-fuel image](assets/images/high-fuel.png)
+
         Not enough fuel<br>
         ![Low fuel image](assets/images/low-fuel.png)
+
         Take-off weight too high<br>
         ![Underload Image](assets/images/high-tow.png)
 
@@ -259,20 +263,23 @@ Testing of the code revealed that in both '.py' files the line breaks (due to li
     * There is **validation** built into the Loadsheet Planner. It checks that each input is within a set range and returns an error to the user if incorrect. The Loadsheet Planner also checks that the final loaded aircraft is within the correct weight ranges, providing a further validation to the user and owner.
        <details><summary>Validation</summary>
         Correct input (fuel shown for example)<br>
-        
+
         ![Correct fuel input](assets/images/fuel-valid.png)
         
          Incorrect input character - Input is not a number. <br>
-
         ![Incorrect fuel input images](assets/images/nan-fuel.png)
         ![Pax error image](assets/images/pax-error.png)
         ![Incorrect cargo](assets/images/cargo-error.png)
+
         Too many passengers <br>
         ![Too many pax image](assets/images/high-pax.png)
+
          Too much fuel<br>
         ![High-fuel image](assets/images/high-fuel.png)
+
         Not enough fuel<br>
         ![Low fuel image](assets/images/low-fuel.png)
+
         Take-off weight too high<br>
         ![Underload Image](assets/images/high-tow.png)
 * As an owner I want to ensure the loadsheet is useable by those detached from the input process.
